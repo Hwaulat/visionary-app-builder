@@ -87,7 +87,6 @@ export function Segmented<T extends string>({ value, options, onChange }: { valu
 export function FilterSelect({ options, value, onChange }: { options: string[]; value: string; onChange: (v: string) => void }) {
   return (
     <SelectInput
-      containerClassName="w-44"
       defValue={value}
       onChange={(val) => onChange(val as string)}
       datalist={options.map((o) => ({ label: o, value: o }))}

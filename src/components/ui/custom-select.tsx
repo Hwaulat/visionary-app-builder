@@ -72,7 +72,7 @@ const SelectInput = forwardRef<
     : datalist.find((item) => item.value === defValue) || null;
 
   return (
-    <div className={cn('flex flex-col gap-2 w-full', containerClassName)}>
+    <div className={cn('flex flex-col gap-2 w-fit', containerClassName)}>
       {label && (
         <Label>
           {label}
@@ -124,7 +124,7 @@ const SelectInput = forwardRef<
             ),
 
           menu: () =>
-            'mt-2 py-1 border rounded-2xl text-sm border-slate-200 dark:border-slate-700 shadow-md bg-white dark:bg-slate-900 z-50 overflow-hidden',
+            'mt-2 py-1 border rounded-2xl text-sm border-slate-200 dark:border-slate-700 shadow-md bg-white dark:bg-slate-900 z-50 overflow-hidden w-max min-w-full',
 
           multiValue: () => 'gap-1 py-1 px-3 mr-1 bg-slate-200 text-slate-700 font-medium rounded-full',
 
