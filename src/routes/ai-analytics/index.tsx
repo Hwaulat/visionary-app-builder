@@ -120,29 +120,7 @@ function AIAnalyticsIndex() {
 
   return (
     <div className="space-y-5">
-      <PageHeader icon={BrainCircuit} title="AI Analytics">
-        <Link
-          to="/ai-analytics/forecasting"
-          className="flex h-10 items-center gap-2 rounded-lg border bg-card px-4 text-sm shadow-sm transition hover:bg-muted"
-        >
-          <TrendingUp className="size-4" />
-          Forecasting
-        </Link>
-        <Link
-          to="/ai-analytics/rul"
-          className="flex h-10 items-center gap-2 rounded-lg border bg-card px-4 text-sm shadow-sm transition hover:bg-muted"
-        >
-          <Hourglass className="size-4" />
-          RUL Estimation
-        </Link>
-        <Link
-          to="/ai-analytics/anomalies"
-          className="flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm text-primary-foreground shadow-sm transition hover:bg-primary/90"
-        >
-          <AlertTriangle className="size-4" />
-          Anomaly Detection
-        </Link>
-      </PageHeader>
+      <PageHeader icon={BrainCircuit} title="AI Analytics" />
 
       {/* KPI row */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
