@@ -16,7 +16,7 @@ const groups: { title: string; items: Item[] }[] = [
         { label: "Details", to: "/dashboard/details" },
         { label: "Real-time", to: "/dashboard/realtime" },
       ] },
-      { label: "Alert Logs", to: "/alerts", icon: BellRing, badge: 3 },
+      { label: "Log Alert", to: "/alerts", icon: BellRing, badge: 3 },
     ],
   },
   {
