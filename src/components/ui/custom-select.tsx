@@ -118,27 +118,27 @@ const SelectInput = forwardRef<
         classNames={{
           control: () =>
             cn(
-              '!min-h-[38px] !px-2 border rounded-xl bg-background text-sm text-slate-600 dark:text-slate-300 shadow-none border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600',
+              '!min-h-[38px] !px-3 border-2 rounded-full bg-slate-100 dark:bg-slate-800 text-sm text-slate-500 font-medium shadow-none border-transparent hover:bg-slate-200/50 hover:border-slate-200 dark:border-transparent dark:hover:border-slate-600 focus-within:bg-white focus-within:border-blue-500 dark:focus-within:border-blue-500 transition-colors',
               hasError && 'bg-white border-destructive',
-              disabled && 'bg-muted text-muted-foreground',
+              disabled && 'opacity-60 cursor-not-allowed',
             ),
 
           menu: () =>
-            'mt-2 py-1 border rounded-xl text-sm border-slate-200 dark:border-slate-700 shadow-md bg-popover z-50 overflow-hidden',
+            'mt-2 py-1 border rounded-2xl text-sm border-slate-200 dark:border-slate-700 shadow-md bg-white dark:bg-slate-900 z-50 overflow-hidden',
 
-          multiValue: () => 'gap-1 py-1 px-2 mr-1 bg-muted rounded',
+          multiValue: () => 'gap-1 py-1 px-3 mr-1 bg-slate-200 text-slate-700 font-medium rounded-full',
 
-          multiValueRemove: () => 'mt-0.5 px-0 mr-0 hover:text-destructive cursor-pointer',
+          multiValueRemove: () => 'mt-0.5 px-0 mr-0 hover:text-red-500 cursor-pointer',
 
           option: ({ isFocused, isSelected }) =>
             cn(
-              '!flex items-center min-h-8 px-3 text-sm cursor-default hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-100 transition-colors',
+              '!flex items-center min-h-8 px-4 text-sm cursor-default hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-100 transition-colors',
               (isFocused || isSelected) &&
-                'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100',
+                'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100 font-medium',
             ),
 
           placeholder: ({ isDisabled }) =>
-            cn('text-slate-400 dark:text-slate-500', isDisabled && 'opacity-50'),
+            cn('text-slate-400 font-normal dark:text-slate-500', isDisabled && 'opacity-50'),
 
           valueContainer: () => 'stroke-0 mr-2',
           
