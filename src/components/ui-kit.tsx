@@ -13,7 +13,7 @@ export function PageHeader({ icon: Icon, title, children }: { icon: LucideIcon; 
   );
 }
 
-export function Panel({ title, action, children, className = "" }: { title?: string; action?: ReactNode; children: ReactNode; className?: string }) {
+export function Panel({ title, action, children, className = "" }: { title?: ReactNode; action?: ReactNode; children: ReactNode; className?: string }) {
   return (
     <section className={`rounded-xl bg-card p-5 shadow-sm ${className}`}>
       {title && (
@@ -36,7 +36,7 @@ const tones = {
 };
 export type Tone = keyof typeof tones;
 
-export function StatCard({ label, value, unit, icon: Icon, tone, hint }: { label: string; value: string; unit?: string; icon: LucideIcon; tone: Tone; hint?: string }) {
+export function StatCard({ label, value, unit, icon: Icon, tone, hint, subtext }: { label: string; value: ReactNode; unit?: string; icon: LucideIcon; tone: Tone; hint?: string; subtext?: ReactNode }) {
   return (
     <div className="rounded-xl bg-card p-5 shadow-sm transition-shadow hover:shadow-md">
       <div className="flex items-start justify-between gap-2">
@@ -49,6 +49,7 @@ export function StatCard({ label, value, unit, icon: Icon, tone, hint }: { label
       <div className="mt-4 text-2xl font-bold tabular-nums">
         {value} {unit && <span className="text-sm font-medium text-muted-foreground">{unit}</span>}
       </div>
+      {subtext && <div className="mt-1 text-xs text-muted-foreground">{subtext}</div>}
     </div>
   );
 }

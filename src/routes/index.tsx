@@ -1,96 +1,114 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { LayoutGrid, Zap, Wallet, Gauge, Activity, BellRing } from "lucide-react";
-import { Bar, ComposedChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, Area, AreaChart } from "recharts";
-import { PageHeader, Panel, StatCard, Segmented, FilterSelect } from "@/components/ui-kit";
-import { machines, monthlyEnergy, hourly } from "@/lib/mock";
+import { DollarSign, Zap, Wind, TrendingUp } from "lucide-react";
+import { Bar, ComposedChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts";
+import { Panel, StatCard } from "@/components/ui-kit";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Dashboard General — EnergyIQ" },
-      { name: "description", content: "Facility-wide energy overview: kWh, cost, peak demand, power factor and top consumers." },
-      { property: "og:title", content: "Dashboard General — EnergyIQ" },
-      { property: "og:description", content: "Facility-wide energy overview at a glance." },
+      { name: "description", content: "Facility-wide energy overview" },
     ],
   }),
   component: General,
 });
 
-const periods = ["Today", "7 Days", "30 Days", "Custom"] as const;
+const monthlyData = [
+  { month: "Jan", value: 0, average: 0 },
+  { month: "Feb", value: 0, average: 0 },
+  { month: "Mar", value: 3500000, average: 1000000 },
+  { month: "Apr", value: 5000000, average: 2100000 },
+  { month: "May", value: 5700000, average: 2800000 },
+  { month: "Jun", value: 3500000, average: 2900000 },
+  { month: "Jul", value: 600000, average: 2600000 },
+  { month: "Aug", value: 1600000, average: 2500000 },
+  { month: "Sep", value: 2466133, average: 2500000 },
+  { month: "Oct", value: 0, average: 2200000 },
+  { month: "Nov", value: 0, average: 2000000 },
+  { month: "Dec", value: 0, average: 1800000 },
+];
 
 function General() {
-  const [period, setPeriod] = useState<(typeof periods)[number]>("30 Days");
-  const [area, setArea] = useState("All Area");
-  const mult = period === "Today" ? 1 / 30 : period === "7 Days" ? 7 / 30 : 1;
-  const top = [...machines].sort((a, b) => b.kwh - a.kwh).slice(0, 5);
-  const maxK = top[0].kwh;
-  const total = 58420 * mult;
-
   return (
-    <div className="space-y-5">
-      <PageHeader icon={LayoutGrid} title="Dashboard - General">
-        <FilterSelect value={area} onChange={setArea} options={["All Area", "Utility", "Molding", "Stamping", "Assembly", "Paint"]} />
-        <Segmented value={period} options={[...periods]} onChange={setPeriod} />
-      </PageHeader>
-
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
-        <StatCard label="Total Energy" value={Math.round(total).toLocaleString()} unit="kWh" icon={Zap} tone="primary" hint="Sum of all meters" />
-        <StatCard label="Est. Cost" value={`Rp ${(total * 1444.7 / 1e6).toFixed(1)}`} unit="jt" icon={Wallet} tone="warning" hint="Based on active tariff" />
-        <StatCard label="Peak Demand" value="742" unit="kW" icon={Gauge} tone="info" />
-        <StatCard label="Power Factor" value="0.91" icon={Activity} tone="success" />
-        <StatCard label="Active Alerts" value="3" icon={BellRing} tone="destructive" />
+    <div className="space-y-5 pb-10">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <StatCard
+          label="Electricity Cost"
+          value="IDR 175.374.362.000"
+          icon={DollarSign}
+          tone="success"
+          hint="Total accumulated electricity cost"
+        />
+        <StatCard
+          label="kWh"
+          value="2.466.133"
+          icon={Zap}
+          tone="info"
+          hint="Total accumulated energy consumption"
+        />
+        <StatCard
+          label="Carbon Emission"
+          value="0,138 MtCO2e"
+          icon={Wind}
+          tone="warning"
+          hint="Estimated carbon footprint"
+          subtext="0,138 MegaTon CO2-e"
+        />
       </div>
 
-      <Panel title="Energy Consumption vs Target" action={<span className="text-sm font-semibold italic text-primary">Settings Target</span>}>
-        <div className="h-80">
-          <ResponsiveContainer>
-            <ComposedChart data={monthlyEnergy}>
+      <Panel
+        className="pt-6"
+        title={
+          <div className="flex flex-col gap-1">
+            <span className="text-xl font-bold">Power Consumption - kWh</span>
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-bold">2.466.133 kWh</span>
+              <span className="inline-flex items-center gap-1 rounded bg-red-50 px-2 py-0.5 text-xs font-semibold text-red-600 dark:bg-red-500/10 dark:text-red-400">
+                50% <TrendingUp className="size-3" />
+              </span>
+            </div>
+          </div>
+        }
+        action={
+          <div className="flex items-center gap-3">
+            <select className="h-9 min-w-32 rounded-md border bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
+              <option>All Device</option>
+            </select>
+            <select className="h-9 w-24 rounded-md border bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
+              <option>2026</option>
+            </select>
+          </div>
+        }
+      >
+        <div className="mt-6 h-[400px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart data={monthlyData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
-              <XAxis dataKey="month" tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} />
-              <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
-              <Bar dataKey="kwh" name="kWh" fill="var(--chart-1)" radius={[3, 3, 0, 0]} barSize={22} />
-              <Line dataKey="target" name="Target" stroke="var(--chart-2)" strokeDasharray="5 5" strokeWidth={2} dot={{ r: 3 }} />
+              <XAxis dataKey="month" tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} dy={10} />
+              <YAxis
+                tick={{ fontSize: 12, fill: "var(--muted-foreground)" }}
+                axisLine={false}
+                tickLine={false}
+                tickFormatter={(val) => (val === 0 ? "0" : `${val / 1000000}M`)}
+                domain={[0, 6000000]}
+                ticks={[0, 1500000, 3000000, 4500000, 6000000]}
+                dx={-10}
+              />
+              <Tooltip
+                contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }}
+                formatter={(value: number, name: string) => [value.toLocaleString(), name]}
+              />
+              <Legend
+                iconType="circle"
+                wrapperStyle={{ paddingTop: "20px" }}
+                formatter={(value) => <span className="text-sm font-medium text-muted-foreground">{value}</span>}
+              />
+              <Bar dataKey="value" name="Value" fill="#14b8a6" radius={[4, 4, 0, 0]} barSize={32} />
+              <Line dataKey="average" name="Average" type="monotone" stroke="#f59e0b" strokeWidth={2} dot={{ r: 4, fill: "#fff", stroke: "#f59e0b", strokeWidth: 2 }} activeDot={{ r: 6 }} />
             </ComposedChart>
           </ResponsiveContainer>
         </div>
       </Panel>
-
-      <div className="grid gap-5 lg:grid-cols-5">
-        <Panel title="Top 5 Consuming Machines" className="lg:col-span-2">
-          <ul className="space-y-4">
-            {top.map((m, i) => (
-              <li key={m.id}>
-                <div className="mb-1 flex justify-between text-sm">
-                  <span><span className="mr-2 text-muted-foreground">{i + 1}.</span>{m.name}</span>
-                  <span className="font-semibold tabular-nums">{Math.round(m.kwh * mult).toLocaleString()} kWh</span>
-                </div>
-                <div className="h-2 rounded-full bg-muted"><div className="h-2 rounded-full bg-chart-2" style={{ width: `${(m.kwh / maxK) * 100}%` }} /></div>
-              </li>
-            ))}
-          </ul>
-        </Panel>
-        <Panel title="Load Profile (kW, today)" className="lg:col-span-3">
-          <div className="h-64">
-            <ResponsiveContainer>
-              <AreaChart data={hourly}>
-                <defs>
-                  <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="var(--chart-1)" stopOpacity={0.35} />
-                    <stop offset="100%" stopColor="var(--chart-1)" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
-                <XAxis dataKey="hour" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} interval={3} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
-                <Area dataKey="kw" stroke="var(--chart-1)" strokeWidth={2} fill="url(#g1)" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </Panel>
-      </div>
     </div>
   );
 }
