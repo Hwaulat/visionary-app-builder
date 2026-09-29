@@ -30,7 +30,7 @@ const voltageItems = [
 ];
 
 const rightMetrics = [
-  { title: "Energy", value: "4,044.5", unit: "kwh", subtext: "Apparent Energy Del" },
+  { title: "Energy", value: "53.5", unit: "kWh", subtext: "Apparent Energy Del" },
   { title: "Power", value: "150.5", unit: "kVA", subtext: "Apparent Power" },
   { title: "Voltage Unbalance", value: "1.2", unit: "%", subtext: "Percentage" },
   { title: "THD V 1", value: "2.4", unit: "%", subtext: "Percentage" },
