@@ -72,7 +72,7 @@ const SelectInput = forwardRef<
     : datalist.find((item) => item.value === defValue) || null;
 
   return (
-    <div className={cn('flex flex-col gap-2 w-fit', containerClassName)}>
+    <div className={cn('flex flex-col gap-2', containerClassName, 'w-max')}>
       {label && (
         <Label>
           {label}
@@ -85,7 +85,7 @@ const SelectInput = forwardRef<
         options={datalist}
         isMulti={props.isMulti}
         isDisabled={disabled}
-        isClearable={hideClear ? false : true}
+        isClearable={false}
         unstyled
         styles={{
           control: (base) => ({
