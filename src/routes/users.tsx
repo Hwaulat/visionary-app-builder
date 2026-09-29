@@ -20,6 +20,7 @@ import { Search } from "@/components/ui/search";
 import { SelectInput } from "@/components/ui/custom-select";
 import { users as seed, type User } from "@/lib/mock";
 import { Tabs } from "@/components/ui/custom-tabs";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/users")({
   head: () => ({
@@ -123,18 +124,10 @@ function UsersPage() {
                 <tr key={u.id} className="transition-colors hover:bg-muted/30">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <button className="grid size-9 place-items-center rounded-xl border border-slate-200 bg-transparent text-slate-400 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-600 dark:border-slate-700 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300">
-                        <Eye className="size-4" />
-                      </button>
-                      <button className="grid size-9 place-items-center rounded-xl border border-slate-200 bg-transparent text-slate-400 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-600 dark:border-slate-700 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300">
-                        <RotateCcw className="size-4" />
-                      </button>
-                      <button className="grid size-9 place-items-center rounded-xl border border-slate-200 bg-transparent text-slate-400 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-600 dark:border-slate-700 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300">
-                        <Pencil className="size-4" />
-                      </button>
-                      <button className="grid size-9 place-items-center rounded-xl border border-slate-200 bg-transparent text-slate-400 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500 dark:border-slate-700 dark:text-slate-500 dark:hover:border-red-900/30 dark:hover:bg-red-900/20 dark:hover:text-red-400">
-                        <Trash2 className="size-4" />
-                      </button>
+                      <Button variant="iconView" icon={<Eye className="size-4" />} />
+                      <Button variant="iconView" icon={<RotateCcw className="size-4" />} />
+                      <Button variant="iconEdit" icon={<Pencil className="size-4" />} />
+                      <Button variant="iconDelete" icon={<Trash2 className="size-4" />} />
                     </div>
                   </td>
                   <td className="px-4 py-3">
