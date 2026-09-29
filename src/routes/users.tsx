@@ -122,18 +122,18 @@ function UsersPage() {
               {rows.map((u) => (
                 <tr key={u.id} className="transition-colors hover:bg-muted/30">
                   <td className="px-4 py-3">
-                    <div className="flex items-center gap-1.5">
-                      <button className="grid size-7 place-items-center rounded border bg-background text-muted-foreground shadow-sm transition hover:text-primary">
-                        <Eye className="size-3.5" />
+                    <div className="flex items-center gap-2">
+                      <button className="grid size-9 place-items-center rounded-xl border border-slate-200 bg-transparent text-slate-400 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-600 dark:border-slate-700 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300">
+                        <Eye className="size-4" />
                       </button>
-                      <button className="grid size-7 place-items-center rounded border bg-background text-muted-foreground shadow-sm transition hover:text-primary">
-                        <RotateCcw className="size-3.5" />
+                      <button className="grid size-9 place-items-center rounded-xl border border-slate-200 bg-transparent text-slate-400 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-600 dark:border-slate-700 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300">
+                        <RotateCcw className="size-4" />
                       </button>
-                      <button className="grid size-7 place-items-center rounded border bg-background text-muted-foreground shadow-sm transition hover:text-primary">
-                        <Pencil className="size-3.5" />
+                      <button className="grid size-9 place-items-center rounded-xl border border-slate-200 bg-transparent text-slate-400 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-600 dark:border-slate-700 dark:text-slate-500 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300">
+                        <Pencil className="size-4" />
                       </button>
-                      <button className="grid size-7 place-items-center rounded border bg-background text-muted-foreground shadow-sm transition hover:text-destructive">
-                        <Trash2 className="size-3.5" />
+                      <button className="grid size-9 place-items-center rounded-xl border border-slate-200 bg-transparent text-slate-400 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500 dark:border-slate-700 dark:text-slate-500 dark:hover:border-red-900/30 dark:hover:bg-red-900/20 dark:hover:text-red-400">
+                        <Trash2 className="size-4" />
                       </button>
                     </div>
                   </td>
