@@ -87,6 +87,23 @@ const SelectInput = forwardRef<
         isDisabled={disabled}
         isClearable={hideClear ? false : true}
         unstyled
+        styles={{
+          control: (base) => ({
+            ...base,
+            width: 'max-content',
+            minWidth: '100%',
+          }),
+          singleValue: (base) => ({
+            ...base,
+            overflow: 'visible',
+            textOverflow: 'clip',
+            whiteSpace: 'nowrap',
+          }),
+          valueContainer: (base) => ({
+            ...base,
+            flexWrap: 'nowrap',
+          }),
+        }}
         menuPosition="absolute"
         menuPortalTarget={typeof document !== 'undefined' ? document.body : null}
         menuShouldScrollIntoView={false}
