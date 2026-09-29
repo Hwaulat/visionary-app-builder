@@ -58,15 +58,26 @@ function Summary() {
         <div className="flex flex-wrap items-center gap-3">
           <Segmented value={metric} options={["Cost", "kWh", "kVArh"]} onChange={setMetric} />
           <Segmented value={period} options={["Daily", "Monthly", "Yearly"]} onChange={setPeriod} />
+          
+          {period === "Daily" && (
+            <button className="flex items-center gap-2 rounded-md border bg-background px-4 h-9 text-sm shadow-sm transition hover:bg-muted/50 text-muted-foreground">
+              <Calendar className="size-4" />
+              <span>01/09/2026 - 30/09/2026</span>
+            </button>
+          )}
+          {period === "Monthly" && (
+            <button className="flex items-center gap-2 rounded-md border bg-background px-4 h-9 text-sm shadow-sm transition hover:bg-muted/50 text-muted-foreground">
+              <Calendar className="size-4" />
+              <span>Aug 2026</span>
+            </button>
+          )}
+          {period === "Yearly" && (
+            <button className="flex items-center gap-2 rounded-md border bg-background px-4 h-9 text-sm shadow-sm transition hover:bg-muted/50 text-muted-foreground">
+              <Calendar className="size-4" />
+              <span>2026</span>
+            </button>
+          )}
         </div>
-      </div>
-
-      {/* Filter Panel */}
-      <div className="flex items-center gap-3 rounded-xl border bg-card p-3 shadow-sm">
-        <button className="flex items-center gap-2 rounded-md border bg-background px-4 h-10 text-sm shadow-sm transition hover:bg-muted/50 text-muted-foreground">
-          <Calendar className="size-4" />
-          <span>31/08/2026</span>
-        </button>
       </div>
 
       {metric === "kVArh" ? (
