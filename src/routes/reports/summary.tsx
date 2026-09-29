@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { BarChart3, Calendar, LineChart as LineChartIcon } from "lucide-react";
 import { ComposedChart, Bar, Line, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts";
 import { Panel, Segmented } from "@/components/ui-kit";
@@ -14,17 +14,37 @@ export const Route = createFileRoute("/reports/summary")({
   component: Summary,
 });
 
-// Generate some dummy data that falls between 0 and 4
-const chartData = Array.from({ length: 30 }, (_, i) => ({
-  day: `${i + 1}`,
-  wbp: Math.random() * 1.5 + 0.5,
-  lwbp: Math.random() * 1.5 + 0.5,
-  max: 4,
-  std: 3,
-}));
-
 function Summary() {
   const [metric, setMetric] = useState<"Cost" | "kWh" | "kVArh">("Cost");
+
+  const chartData = useMemo(() => {
+    if (metric === "kWh") {
+      return Array.from({ length: 30 }, (_, i) => {
+        const day = `${String(i + 1).padStart(2, '0')} Sep`;
+        if (i < 14 || i === 29) {
+          return { day, wbp: 0, lwbp: 0 };
+        }
+        if (i === 28) { // 29 Sep
+          return { day, wbp: 35000, lwbp: 25000 };
+        }
+        return {
+          day,
+          wbp: 34000 + Math.random() * 2000,
+          lwbp: 135000 + Math.random() * 5000,
+        };
+      });
+    }
+    // Default dummy for Cost / kVArh
+    return Array.from({ length: 30 }, (_, i) => ({
+      day: `${String(i + 1).padStart(2, '0')} Sep`,
+      wbp: Math.random() * 1.5 + 0.5,
+      lwbp: Math.random() * 1.5 + 0.5,
+      max: 4,
+      std: 3,
+    }));
+  }, [metric]);
+
+  const maxDomain = metric === "kWh" ? [0, 180000] : [0, 4];
 
   return (
     <div className="space-y-6 pb-10">
@@ -59,12 +79,12 @@ function Summary() {
             <LineChartIcon className="size-5 text-[#3b82f6] mt-0.5" />
             <div className="flex flex-col">
               <span className="font-bold text-[#0f284a] dark:text-foreground">Energy Usage</span>
-              <span className="text-xs font-normal text-muted-foreground">Cost breakdown (WBP, LWBP) with Max and Std limits</span>
+              <span className="text-xs font-normal text-muted-foreground">{metric} breakdown (WBP, LWBP) with Max and Std limits</span>
             </div>
           </div>
         }
         action={
-          <div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">Cost</div>
+          <div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">{metric}</div>
         }
       >
         <div className="mt-6 h-[300px]">
@@ -72,7 +92,14 @@ function Summary() {
             <ComposedChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="var(--border)" />
               <XAxis dataKey="day" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickMargin={10} />
-              <YAxis tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickCount={5} domain={[0, 4]} />
+              <YAxis 
+                tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} 
+                axisLine={false} 
+                tickLine={false} 
+                tickCount={5} 
+                domain={maxDomain}
+                tickFormatter={(v) => metric === "kWh" && v > 0 ? (v / 1000).toFixed(3) : v}
+              />
               <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
               <Legend verticalAlign="bottom" height={36} iconType="square" wrapperStyle={{ fontSize: 12 }} />
               
@@ -93,12 +120,12 @@ function Summary() {
             <LineChartIcon className="size-5 text-[#3b82f6] mt-0.5" />
             <div className="flex flex-col">
               <span className="font-bold text-[#0f284a] dark:text-foreground">LVMDP 01</span>
-              <span className="text-xs font-normal text-muted-foreground">Device-level cost and threshold trends</span>
+              <span className="text-xs font-normal text-muted-foreground">Device-level {metric.toLowerCase()} and threshold trends</span>
             </div>
           </div>
         }
         action={
-          <div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">Cost</div>
+          <div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">{metric}</div>
         }
       >
         <div className="mt-6 h-[300px]">
@@ -106,7 +133,14 @@ function Summary() {
             <ComposedChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="var(--border)" />
               <XAxis dataKey="day" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickMargin={10} />
-              <YAxis tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickCount={5} domain={[0, 4]} />
+              <YAxis 
+                tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} 
+                axisLine={false} 
+                tickLine={false} 
+                tickCount={5} 
+                domain={maxDomain}
+                tickFormatter={(v) => metric === "kWh" && v > 0 ? (v / 1000).toFixed(3) : v}
+              />
               <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
               <Legend verticalAlign="bottom" height={36} iconType="square" wrapperStyle={{ fontSize: 12 }} />
               
