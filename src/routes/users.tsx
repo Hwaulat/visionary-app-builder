@@ -34,6 +34,24 @@ export const Route = createFileRoute("/users")({
 
 function UsersPage() {
   const [rows, setRows] = useState(seed);
+  const [activeRole, setActiveRole] = useState("superadmin");
+
+  const roles = ["superadmin", "admin", "member", "test", "fasf"];
+  const menus = [
+    "Dashboard - General",
+    "Dashboard - Details",
+    "Dashboard - Real-time",
+    "AI Analytics - Machine Overview",
+    "AI Analytics - Forecasting",
+    "AI Analytics - RUL Estimation",
+    "AI Analytics - Anomaly Detection",
+    "Reports - Overview",
+    "Reports - Summary",
+    "Master Data - Overview",
+    "Master Data - Device",
+    "Users Management",
+    "Log Alert",
+  ];
 
   const totalUsers = rows.length;
   const activeUsers = rows.filter((r) => r.active).length;
@@ -211,6 +229,72 @@ function UsersPage() {
     </div>
   );
 
+  const rolePermissionsContent = (
+    <div className="flex flex-col gap-6 lg:flex-row">
+      {/* Left Column - Roles */}
+      <div className="w-full lg:w-1/3 shrink-0 space-y-4 rounded-xl border bg-card p-5 shadow-sm">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-[#0f284a] dark:text-white">Roles</h2>
+          <Button variant="blue" icon={<Plus className="size-4" />} text="Create New Role" size="sm" className="h-8 rounded-lg text-xs" />
+        </div>
+        <div className="space-y-2">
+          {roles.map((r) => {
+            const isActive = activeRole === r;
+            return (
+              <div 
+                key={r}
+                onClick={() => setActiveRole(r)}
+                className={`flex cursor-pointer items-center justify-between rounded-xl p-3 transition-colors ${isActive ? 'bg-[#1a4a8c] text-white' : 'bg-slate-50 text-slate-700 hover:bg-slate-100 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:bg-slate-800'}`}
+              >
+                <span className="font-medium">{r}</span>
+                <div className="flex gap-2">
+                  <div className={`grid size-7 place-items-center rounded-lg border ${isActive ? 'border-blue-400/30 text-white hover:bg-blue-600' : 'border-slate-200 text-slate-400 bg-white hover:border-blue-400 hover:text-blue-500 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-blue-500'}`}>
+                    <Pencil className="size-3.5" />
+                  </div>
+                  <div className="grid size-7 place-items-center rounded-lg bg-red-500 text-white hover:bg-red-600 shadow-sm">
+                    <Trash2 className="size-3.5" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Right Column - Permissions */}
+      <div className="flex-1 rounded-xl border bg-card shadow-sm overflow-hidden">
+        <div className="p-5 border-b border-slate-100 dark:border-slate-800">
+          <h2 className="text-xl font-bold text-[#0f284a] dark:text-white">{activeRole}</h2>
+          <p className="text-sm text-slate-500 mt-1">Manage permissions for this role</p>
+        </div>
+        <div className="w-full overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="bg-[#f8fafc] dark:bg-slate-800/50 text-slate-500 text-xs font-semibold">
+              <tr className="border-b border-slate-100 dark:border-slate-800">
+                <th className="py-3 px-5 text-left uppercase">Fitur</th>
+                <th className="py-3 px-5 text-center uppercase w-32">All Access</th>
+                <th className="py-3 px-5 text-center uppercase w-32">Only View</th>
+              </tr>
+            </thead>
+            <tbody>
+              {menus.map((m) => (
+                <tr key={m} className="border-b border-slate-100 dark:border-slate-800 last:border-0 hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+                  <td className="py-3.5 px-5 font-medium text-slate-700 dark:text-slate-300">{m}</td>
+                  <td className="py-3.5 px-5 text-center">
+                    <input type="checkbox" defaultChecked className="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer" />
+                  </td>
+                  <td className="py-3.5 px-5 text-center">
+                    <input type="checkbox" className="size-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+
   const tabsItems = [
     {
       value: "user-account",
@@ -219,8 +303,8 @@ function UsersPage() {
     },
     {
       value: "role-permission",
-      label: "Role Permission",
-      content: <div className="py-10 text-center text-muted-foreground">Role permissions management is under construction.</div>,
+      label: "Role Permissions",
+      content: rolePermissionsContent,
     },
   ];
 
