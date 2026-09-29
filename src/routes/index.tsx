@@ -178,6 +178,67 @@ function General() {
           </ResponsiveContainer>
         </div>
       </Panel>
+
+      <Panel
+        className="pt-4"
+        title={
+          <div className="flex items-center gap-3">
+            <span className="font-semibold text-foreground">Device</span>
+            <select className="h-9 min-w-32 rounded-md border bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
+              <option>LVMDP01</option>
+            </select>
+          </div>
+        }
+      >
+        <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3">
+          {[
+            { title: "kW", status: "OK", value: "111.01", min: "100", avg: "111.01", max: "120" },
+            { title: "Voltage [v]", status: "NG", value: "227.2", min: "220", avg: "227.2", max: "240" },
+            { title: "kVAr", status: "OK", value: "0", min: "0", avg: "0", max: "0" },
+            { title: "kVA", status: "OK", value: "0", min: "0", avg: "0", max: "0" },
+            { title: "Current [A]", status: "NG", value: "183.47", min: "150.05", avg: "183.47", max: "199.92" },
+            { title: "Frequency [Hz]", status: "NG", value: "49.73", min: "49", avg: "49.73", max: "50" },
+          ].map((p, idx) => (
+            <div key={idx} className="rounded-xl border bg-card shadow-sm overflow-hidden flex flex-col">
+              <div className="flex items-center justify-between border-b px-4 py-3 bg-card">
+                <span className="font-semibold text-sm">{p.title}</span>
+                <span
+                  className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${
+                    p.status === "OK"
+                      ? "bg-emerald-50 text-emerald-500 dark:bg-emerald-500/10 dark:text-emerald-400"
+                      : "bg-red-50 text-red-500 dark:bg-red-500/10 dark:text-red-400"
+                  }`}
+                >
+                  {p.status}
+                </span>
+              </div>
+              <div className="p-6 text-center flex-1 grid place-items-center">
+                <div
+                  className={`text-4xl font-bold tabular-nums tracking-tight ${
+                    p.status === "NG" ? "text-red-500" : "text-foreground"
+                  }`}
+                >
+                  {p.value}
+                </div>
+              </div>
+              <div className="grid grid-cols-3 border-t text-center text-xs divide-x bg-card">
+                <div className="py-3 flex flex-col gap-1">
+                  <span className="text-muted-foreground font-medium">Min</span>
+                  <span className="font-bold text-sm">{p.min}</span>
+                </div>
+                <div className="py-3 flex flex-col gap-1">
+                  <span className="text-muted-foreground font-medium">Avg last 10 days</span>
+                  <span className="font-bold text-sm">{p.avg}</span>
+                </div>
+                <div className="py-3 flex flex-col gap-1">
+                  <span className="text-muted-foreground font-medium">Max</span>
+                  <span className="font-bold text-sm">{p.max}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Panel>
     </div>
   );
 }
