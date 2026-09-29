@@ -14,6 +14,10 @@ import { Route as AlertsRouteImport } from './routes/alerts'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as MasterDataRouteImport } from './routes/master-data'
 import { Route as UsersRouteImport } from './routes/users'
+import { Route as AiAnalyticsIndexRouteImport } from './routes/ai-analytics/index'
+import { Route as AiAnalyticsAnomaliesRouteImport } from './routes/ai-analytics/anomalies'
+import { Route as AiAnalyticsForecastingRouteImport } from './routes/ai-analytics/forecasting'
+import { Route as AiAnalyticsRulRouteImport } from './routes/ai-analytics/rul'
 import { Route as DashboardDetailsRouteImport } from './routes/dashboard/details'
 import { Route as DashboardRealtimeRouteImport } from './routes/dashboard/realtime'
 import { Route as ReportsIndexRouteImport } from './routes/reports/index'
@@ -44,6 +48,26 @@ const UsersRoute = UsersRouteImport.update({
   path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiAnalyticsIndexRoute = AiAnalyticsIndexRouteImport.update({
+  id: '/ai-analytics/',
+  path: '/ai-analytics/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAnalyticsAnomaliesRoute = AiAnalyticsAnomaliesRouteImport.update({
+  id: '/ai-analytics/anomalies',
+  path: '/ai-analytics/anomalies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAnalyticsForecastingRoute = AiAnalyticsForecastingRouteImport.update({
+  id: '/ai-analytics/forecasting',
+  path: '/ai-analytics/forecasting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAnalyticsRulRoute = AiAnalyticsRulRouteImport.update({
+  id: '/ai-analytics/rul',
+  path: '/ai-analytics/rul',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardDetailsRoute = DashboardDetailsRouteImport.update({
   id: '/dashboard/details',
   path: '/dashboard/details',
@@ -71,9 +95,13 @@ export interface FileRoutesByFullPath {
   '/assistant': typeof AssistantRoute
   '/master-data': typeof MasterDataRoute
   '/users': typeof UsersRoute
+  '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
+  '/ai-analytics/forecasting': typeof AiAnalyticsForecastingRoute
+  '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
   '/reports/summary': typeof ReportsSummaryRoute
+  '/ai-analytics/': typeof AiAnalyticsIndexRoute
   '/reports/': typeof ReportsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -82,9 +110,13 @@ export interface FileRoutesByTo {
   '/assistant': typeof AssistantRoute
   '/master-data': typeof MasterDataRoute
   '/users': typeof UsersRoute
+  '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
+  '/ai-analytics/forecasting': typeof AiAnalyticsForecastingRoute
+  '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
   '/reports/summary': typeof ReportsSummaryRoute
+  '/ai-analytics': typeof AiAnalyticsIndexRoute
   '/reports': typeof ReportsIndexRoute
 }
 export interface FileRoutesById {
@@ -94,9 +126,13 @@ export interface FileRoutesById {
   '/assistant': typeof AssistantRoute
   '/master-data': typeof MasterDataRoute
   '/users': typeof UsersRoute
+  '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
+  '/ai-analytics/forecasting': typeof AiAnalyticsForecastingRoute
+  '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
   '/reports/summary': typeof ReportsSummaryRoute
+  '/ai-analytics/': typeof AiAnalyticsIndexRoute
   '/reports/': typeof ReportsIndexRoute
 }
 export interface FileRouteTypes {
@@ -107,9 +143,13 @@ export interface FileRouteTypes {
     | '/assistant'
     | '/master-data'
     | '/users'
+    | '/ai-analytics/anomalies'
+    | '/ai-analytics/forecasting'
+    | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
     | '/reports/summary'
+    | '/ai-analytics/'
     | '/reports/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -118,9 +158,13 @@ export interface FileRouteTypes {
     | '/assistant'
     | '/master-data'
     | '/users'
+    | '/ai-analytics/anomalies'
+    | '/ai-analytics/forecasting'
+    | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
     | '/reports/summary'
+    | '/ai-analytics'
     | '/reports'
   id:
     | '__root__'
@@ -129,9 +173,13 @@ export interface FileRouteTypes {
     | '/assistant'
     | '/master-data'
     | '/users'
+    | '/ai-analytics/anomalies'
+    | '/ai-analytics/forecasting'
+    | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
     | '/reports/summary'
+    | '/ai-analytics/'
     | '/reports/'
   fileRoutesById: FileRoutesById
 }
@@ -141,9 +189,13 @@ export interface RootRouteChildren {
   AssistantRoute: typeof AssistantRoute
   MasterDataRoute: typeof MasterDataRoute
   UsersRoute: typeof UsersRoute
+  AiAnalyticsAnomaliesRoute: typeof AiAnalyticsAnomaliesRoute
+  AiAnalyticsForecastingRoute: typeof AiAnalyticsForecastingRoute
+  AiAnalyticsRulRoute: typeof AiAnalyticsRulRoute
   DashboardDetailsRoute: typeof DashboardDetailsRoute
   DashboardRealtimeRoute: typeof DashboardRealtimeRoute
   ReportsSummaryRoute: typeof ReportsSummaryRoute
+  AiAnalyticsIndexRoute: typeof AiAnalyticsIndexRoute
   ReportsIndexRoute: typeof ReportsIndexRoute
 }
 
@@ -184,6 +236,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai-analytics/': {
+      id: '/ai-analytics/'
+      path: '/ai-analytics'
+      fullPath: '/ai-analytics/'
+      preLoaderRoute: typeof AiAnalyticsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-analytics/anomalies': {
+      id: '/ai-analytics/anomalies'
+      path: '/ai-analytics/anomalies'
+      fullPath: '/ai-analytics/anomalies'
+      preLoaderRoute: typeof AiAnalyticsAnomaliesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-analytics/forecasting': {
+      id: '/ai-analytics/forecasting'
+      path: '/ai-analytics/forecasting'
+      fullPath: '/ai-analytics/forecasting'
+      preLoaderRoute: typeof AiAnalyticsForecastingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-analytics/rul': {
+      id: '/ai-analytics/rul'
+      path: '/ai-analytics/rul'
+      fullPath: '/ai-analytics/rul'
+      preLoaderRoute: typeof AiAnalyticsRulRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/details': {
       id: '/dashboard/details'
       path: '/dashboard/details'
@@ -221,9 +301,13 @@ const rootRouteChildren: RootRouteChildren = {
   AssistantRoute: AssistantRoute,
   MasterDataRoute: MasterDataRoute,
   UsersRoute: UsersRoute,
+  AiAnalyticsAnomaliesRoute: AiAnalyticsAnomaliesRoute,
+  AiAnalyticsForecastingRoute: AiAnalyticsForecastingRoute,
+  AiAnalyticsRulRoute: AiAnalyticsRulRoute,
   DashboardDetailsRoute: DashboardDetailsRoute,
   DashboardRealtimeRoute: DashboardRealtimeRoute,
   ReportsSummaryRoute: ReportsSummaryRoute,
+  AiAnalyticsIndexRoute: AiAnalyticsIndexRoute,
   ReportsIndexRoute: ReportsIndexRoute,
 }
 export const routeTree = rootRouteImport

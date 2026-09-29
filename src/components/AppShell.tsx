@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import {
-  LayoutGrid, ChevronDown, FileBarChart, BellRing, Database, Users, Bot, PanelLeft, Moon, Sun, Bell, Zap,
+  LayoutGrid, ChevronDown, FileBarChart, BellRing, Database, Users, Bot, PanelLeft, Moon, Sun, Bell, Zap, BrainCircuit,
 } from "lucide-react";
 
 type Item = { label: string; to?: string; icon: typeof LayoutGrid; children?: { label: string; to: string }[]; badge?: number };
@@ -16,6 +16,17 @@ const groups: { title: string; items: Item[] }[] = [
         { label: "Real-time", to: "/dashboard/realtime" },
       ] },
       { label: "Alert Logs", to: "/alerts", icon: BellRing, badge: 3 },
+    ],
+  },
+  {
+    title: "AI & Predictive",
+    items: [
+      { label: "AI Analytics", icon: BrainCircuit, children: [
+        { label: "Fleet Overview", to: "/ai-analytics" },
+        { label: "Forecasting", to: "/ai-analytics/forecasting" },
+        { label: "RUL Estimation", to: "/ai-analytics/rul" },
+        { label: "Anomaly Detection", to: "/ai-analytics/anomalies" },
+      ] },
       { label: "AI Assistant", to: "/assistant", icon: Bot },
     ],
   },
@@ -58,7 +69,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [collapsed, setCollapsed] = useState(false);
   const [dark, setDark] = useState(false);
-  const [open, setOpen] = useState<Record<string, boolean>>({ Dashboard: true, Reports: true });
+  const [open, setOpen] = useState<Record<string, boolean>>({ Dashboard: true, "AI Analytics": true, Reports: true });
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
