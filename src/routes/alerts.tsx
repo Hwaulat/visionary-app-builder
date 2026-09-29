@@ -1,74 +1,141 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { BellRing, Search } from "lucide-react";
-import { PageHeader, Panel, FilterSelect, Pill, sevTone, statusTone } from "@/components/ui-kit";
-import { alerts as seed, type Alert } from "@/lib/mock";
+import { useState } from "react";
+import { Search, TriangleAlert, Calendar, Download, ChevronsUpDown, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { PageHeader, Panel } from "@/components/ui-kit";
 
 export const Route = createFileRoute("/alerts")({
   head: () => ({
     meta: [
-      { title: "Alert Logs — EnergyIQ" },
-      { name: "description", content: "Searchable history of threshold, connection and predictive alerts." },
-      { property: "og:title", content: "Alert Logs — EnergyIQ" },
-      { property: "og:description", content: "Audit and follow up machine alerts." },
+      { title: "Log Alert — EnergyIQ" },
     ],
   }),
   component: Alerts,
 });
 
+const mockAlerts = [
+  { id: 1, priority: "Medium", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Under", log: "under voltage sn detected! Realtime data 0, min standard 15" },
+  { id: 2, priority: "High", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Overload", log: "Overload voltage avg detected! Realtime data 237.5992592652808, max standard 8" },
+  { id: 3, priority: "Medium", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Under", log: "under voltage st detected! Realtime data 0, min standard 2" },
+  { id: 4, priority: "Medium", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Under", log: "under voltage rn detected! Realtime data 0, min standard 24" },
+  { id: 5, priority: "Medium", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Under", log: "under voltage tn detected! Realtime data 0, min standard 9" },
+  { id: 6, priority: "Medium", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Under", log: "under voltage unbalanced detected! Realtime data 0, min standard 8" },
+  { id: 7, priority: "High", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Overload", log: "Overload current avg detected! Realtime data 166.88967817643083, max standard 24" },
+  { id: 8, priority: "Medium", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Under", log: "under voltage rs detected! Realtime data 0, min standard 14" },
+  { id: 9, priority: "Medium", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Under", log: "under voltage tr detected! Realtime data 0, min standard 26" },
+  { id: 10, priority: "High", time: "12 Mar 2026, 15:13", device: "LVMDP01", category: "Overload", log: "Overload real power detected! Realtime data 106.48282980336595, max standard 8" },
+];
+
 function Alerts() {
-  const [rows, setRows] = useState<Alert[]>(seed);
   const [q, setQ] = useState("");
-  const [sev, setSev] = useState("All Severity");
-  const [type, setType] = useState("All Type");
-  const [status, setStatus] = useState("All Status");
-
-  const list = useMemo(() => rows.filter((a) =>
-    (!q || `${a.machine} ${a.metric} ${a.id}`.toLowerCase().includes(q.toLowerCase())) &&
-    (sev === "All Severity" || a.severity === sev) &&
-    (type === "All Type" || a.type === type) &&
-    (status === "All Status" || a.status === status)), [rows, q, sev, type, status]);
-
-  const act = (id: string, s: Alert["status"]) => setRows((r) => r.map((a) => (a.id === id ? { ...a, status: s, ackBy: "admin" } : a)));
 
   return (
-    <div>
-      <PageHeader icon={BellRing} title="Alert Logs">
-        <div className="relative">
-          <Search className="absolute left-3 top-3 size-4 text-muted-foreground" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search machine, metric…" className="h-10 rounded-lg border bg-card pl-9 pr-3 text-sm shadow-sm" />
+    <div className="space-y-4 pb-10">
+      <PageHeader icon={TriangleAlert} title="Log Alert" />
+
+      <Panel className="!p-0 overflow-hidden">
+        {/* Toolbar */}
+        <div className="flex flex-col gap-4 border-b p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="relative flex-1 max-w-xl">
+            <Search className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
+            <input 
+              value={q} 
+              onChange={(e) => setQ(e.target.value)} 
+              placeholder="Search Log Alert..." 
+              className="h-9 w-full rounded-md border bg-background pl-9 pr-3 text-sm shadow-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary" 
+            />
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <select className="h-9 rounded-md border bg-background px-3 text-sm shadow-sm outline-none w-36 text-muted-foreground">
+              <option>Filter Priority</option>
+            </select>
+            
+            <button className="flex items-center gap-2 rounded-md border bg-background px-3 h-9 text-sm shadow-sm text-muted-foreground hover:bg-muted/50 transition">
+              <Calendar className="size-4" />
+              <span>Select date</span>
+            </button>
+            
+            <button className="flex items-center gap-2 rounded-md bg-blue-600 px-4 h-9 text-sm font-medium text-white shadow-sm hover:bg-blue-700 transition">
+              <Download className="size-4" />
+              <span>Download CSV</span>
+            </button>
+          </div>
         </div>
-        <FilterSelect value={sev} onChange={setSev} options={["All Severity", "info", "warning", "critical"]} />
-        <FilterSelect value={type} onChange={setType} options={["All Type", "threshold", "connection", "predictive"]} />
-        <FilterSelect value={status} onChange={setStatus} options={["All Status", "open", "acknowledged", "resolved"]} />
-      </PageHeader>
-      <Panel>
+
+        {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">
-              <tr className="border-b">{["ID", "Timestamp", "Machine", "Metric", "Value", "Type", "Severity", "Status", "Ack by", ""].map((h) => <th key={h} className="px-3 py-3 font-medium">{h}</th>)}</tr>
+            <thead className="bg-muted/30 text-left text-xs font-semibold text-muted-foreground border-b">
+              <tr>
+                <th className="whitespace-nowrap px-6 py-4 cursor-pointer hover:text-foreground transition">
+                  <div className="flex items-center gap-1">Priority <ChevronsUpDown className="size-3" /></div>
+                </th>
+                <th className="whitespace-nowrap px-6 py-4 cursor-pointer hover:text-foreground transition">
+                  <div className="flex items-center gap-1">Triggered Time <ChevronsUpDown className="size-3" /></div>
+                </th>
+                <th className="whitespace-nowrap px-6 py-4 cursor-pointer hover:text-foreground transition">
+                  <div className="flex items-center gap-1">Device Name <ChevronsUpDown className="size-3" /></div>
+                </th>
+                <th className="whitespace-nowrap px-6 py-4 cursor-pointer hover:text-foreground transition">
+                  <div className="flex items-center gap-1">Category <ChevronsUpDown className="size-3" /></div>
+                </th>
+                <th className="whitespace-nowrap px-6 py-4 cursor-pointer hover:text-foreground transition">
+                  <div className="flex items-center gap-1">Alert Log <ChevronsUpDown className="size-3" /></div>
+                </th>
+              </tr>
             </thead>
-            <tbody>
-              {list.map((a) => (
-                <tr key={a.id} className="border-b last:border-0 hover:bg-muted/50">
-                  <td className="px-3 py-3 font-medium">{a.id}</td>
-                  <td className="px-3 py-3 tabular-nums text-muted-foreground">{a.time}</td>
-                  <td className="px-3 py-3">{a.machine}</td>
-                  <td className="px-3 py-3">{a.metric}</td>
-                  <td className="px-3 py-3">{a.value}</td>
-                  <td className="px-3 py-3"><Pill tone={a.type === "predictive" ? "info" : "muted"}>{a.type}</Pill></td>
-                  <td className="px-3 py-3"><Pill tone={sevTone[a.severity]}>{a.severity}</Pill></td>
-                  <td className="px-3 py-3"><Pill tone={statusTone[a.status]}>{a.status}</Pill></td>
-                  <td className="px-3 py-3 text-muted-foreground">{a.ackBy ?? "—"}</td>
-                  <td className="px-3 py-3 text-right">
-                    {a.status === "open" && <button onClick={() => act(a.id, "acknowledged")} className="rounded-md bg-primary px-3 py-1 text-xs font-medium text-primary-foreground">Acknowledge</button>}
-                    {a.status === "acknowledged" && <button onClick={() => act(a.id, "resolved")} className="rounded-md border px-3 py-1 text-xs font-medium">Resolve</button>}
+            <tbody className="divide-y">
+              {mockAlerts.map((a) => (
+                <tr key={a.id} className="hover:bg-muted/30 transition-colors">
+                  <td className="px-6 py-4">
+                    <span 
+                      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold text-white shadow-sm ${
+                        a.priority === 'High' ? 'bg-[#e11d48]' : 'bg-[#f59e0b]'
+                      }`}
+                    >
+                      <TriangleAlert className="size-3" /> {a.priority}
+                    </span>
                   </td>
+                  <td className="px-6 py-4 text-muted-foreground whitespace-nowrap">{a.time}</td>
+                  <td className="px-6 py-4 text-muted-foreground">{a.device}</td>
+                  <td className="px-6 py-4 text-muted-foreground">{a.category}</td>
+                  <td className="px-6 py-4 text-muted-foreground min-w-[300px]">{a.log}</td>
                 </tr>
               ))}
-              {!list.length && <tr><td colSpan={10} className="py-10 text-center text-muted-foreground">No alerts match these filters.</td></tr>}
             </tbody>
           </table>
+        </div>
+
+        {/* Footer Pagination */}
+        <div className="flex items-center justify-between border-t p-4 text-sm text-muted-foreground bg-card">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span>Rows per page</span>
+              <select className="h-8 rounded-md border bg-background px-2 py-1 outline-none text-foreground shadow-sm">
+                <option>10</option>
+              </select>
+            </div>
+            <span>1-10 of 36</span>
+          </div>
+          
+          <div className="flex items-center gap-1">
+            <button className="grid size-8 place-items-center rounded-md border bg-background hover:bg-muted transition text-muted-foreground" disabled>
+              <ChevronsLeft className="size-4" />
+            </button>
+            <button className="grid size-8 place-items-center rounded-md border bg-background hover:bg-muted transition text-muted-foreground" disabled>
+              <ChevronLeft className="size-4" />
+            </button>
+            <button className="grid size-8 place-items-center rounded-md bg-blue-600 text-white font-medium shadow-sm">1</button>
+            <button className="grid size-8 place-items-center rounded-md border bg-background hover:bg-muted transition text-foreground">2</button>
+            <button className="grid size-8 place-items-center rounded-md border bg-background hover:bg-muted transition text-foreground">3</button>
+            <button className="grid size-8 place-items-center rounded-md border bg-background hover:bg-muted transition text-foreground">4</button>
+            <button className="grid size-8 place-items-center rounded-md border bg-background hover:bg-muted transition text-muted-foreground">
+              <ChevronRight className="size-4" />
+            </button>
+            <button className="grid size-8 place-items-center rounded-md border bg-background hover:bg-muted transition text-muted-foreground">
+              <ChevronsRight className="size-4" />
+            </button>
+          </div>
         </div>
       </Panel>
     </div>
