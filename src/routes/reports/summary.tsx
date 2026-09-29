@@ -71,87 +71,153 @@ function Summary() {
         </button>
       </div>
 
-      {/* Energy Usage Chart */}
-      <Panel
-        className="!p-4"
-        title={
-          <div className="flex items-start gap-2">
-            <LineChartIcon className="size-5 text-[#3b82f6] mt-0.5" />
-            <div className="flex flex-col">
-              <span className="font-bold text-[#0f284a] dark:text-foreground">Energy Usage</span>
-              <span className="text-xs font-normal text-muted-foreground">{metric} breakdown (WBP, LWBP) with Max and Std limits</span>
+      {metric === "kVArh" ? (
+        <>
+          {/* Overview Panel for kVArh */}
+          <div className="rounded-xl border bg-card p-5 shadow-sm">
+            <h3 className="mb-4 text-lg font-bold text-[#0f284a] dark:text-foreground">Overview</h3>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="flex flex-col gap-2 rounded-lg border p-4">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                  <div className="grid size-6 place-items-center rounded bg-[#10b981] text-white"><LineChartIcon className="size-3.5" /></div>
+                  Average (kVArh)
+                </div>
+                <div className="text-xl font-bold">0</div>
+              </div>
+              <div className="flex flex-col gap-2 rounded-lg border p-4">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                  <div className="grid size-6 place-items-center rounded bg-[#10b981] text-white"><LineChartIcon className="size-3.5" /></div>
+                  Total (kVArh)
+                </div>
+                <div className="text-xl font-bold">0</div>
+              </div>
+              <div className="flex flex-col gap-2 rounded-lg border p-4">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                  <div className="grid size-6 place-items-center rounded bg-[#10b981] text-white"><span className="text-xs font-bold">$</span></div>
+                  Average Cost (IDR)
+                </div>
+                <div className="text-xl font-bold">0</div>
+              </div>
+              <div className="flex flex-col gap-2 rounded-lg border p-4">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+                  <div className="grid size-6 place-items-center rounded bg-[#10b981] text-white"><span className="text-xs font-bold">$</span></div>
+                  Cost Total (IDR)
+                </div>
+                <div className="text-xl font-bold">0</div>
+              </div>
             </div>
           </div>
-        }
-        action={
-          <div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">{metric}</div>
-        }
-      >
-        <div className="mt-6 h-[300px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="var(--border)" />
-              <XAxis dataKey="day" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickMargin={10} />
-              <YAxis 
-                tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} 
-                axisLine={false} 
-                tickLine={false} 
-                tickCount={5} 
-                domain={maxDomain}
-                tickFormatter={(v) => metric === "kWh" && v > 0 ? (v / 1000).toFixed(3) : v}
-              />
-              <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
-              <Legend verticalAlign="bottom" height={36} iconType="square" wrapperStyle={{ fontSize: 12 }} />
-              
-              <Bar dataKey="wbp" name="WBP" fill="#10b981" barSize={12} stackId="a" />
-              <Bar dataKey="lwbp" name="LWBP" fill="#a7f3d0" barSize={12} stackId="a" />
-              <Line type="monotone" dataKey="max" name="Max" stroke="#ef4444" strokeWidth={1} dot={{ r: 3 }} activeDot={{ r: 5 }} />
-              <Line type="monotone" dataKey="std" name="Std" stroke="#f59e0b" strokeWidth={1} dot={{ r: 3 }} activeDot={{ r: 5 }} />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
-      </Panel>
 
-      {/* LVMDP 01 Chart */}
-      <Panel
-        className="!p-4"
-        title={
-          <div className="flex items-start gap-2">
-            <LineChartIcon className="size-5 text-[#3b82f6] mt-0.5" />
-            <div className="flex flex-col">
-              <span className="font-bold text-[#0f284a] dark:text-foreground">LVMDP 01</span>
-              <span className="text-xs font-normal text-muted-foreground">Device-level {metric.toLowerCase()} and threshold trends</span>
+          {/* General Chart for kVArh */}
+          <Panel
+            className="!p-4"
+            title={
+              <div className="flex items-start gap-2">
+                <LineChartIcon className="size-5 text-[#3b82f6] mt-0.5" />
+                <div className="flex flex-col">
+                  <span className="font-bold text-[#0f284a] dark:text-foreground">General</span>
+                  <span className="text-xs font-normal text-muted-foreground">Reactive energy trend by period</span>
+                </div>
+              </div>
+            }
+            action={<div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">kVArh</div>}
+          >
+            <div className="mt-6 h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <ComposedChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="var(--border)" />
+                  <XAxis dataKey="day" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickMargin={10} />
+                  <YAxis tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickCount={5} domain={[0, 4]} />
+                </ComposedChart>
+              </ResponsiveContainer>
             </div>
-          </div>
-        }
-        action={
-          <div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">{metric}</div>
-        }
-      >
-        <div className="mt-6 h-[300px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="var(--border)" />
-              <XAxis dataKey="day" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickMargin={10} />
-              <YAxis 
-                tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} 
-                axisLine={false} 
-                tickLine={false} 
-                tickCount={5} 
-                domain={maxDomain}
-                tickFormatter={(v) => metric === "kWh" && v > 0 ? (v / 1000).toFixed(3) : v}
-              />
-              <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
-              <Legend verticalAlign="bottom" height={36} iconType="square" wrapperStyle={{ fontSize: 12 }} />
-              
-              <Bar dataKey="wbp" name="WBP" fill="#10b981" barSize={12} stackId="a" />
-              <Bar dataKey="lwbp" name="LWBP" fill="#a7f3d0" barSize={12} stackId="a" />
-              <Line type="monotone" dataKey="max" name="Max" stroke="#ef4444" strokeWidth={1} dot={{ r: 3 }} activeDot={{ r: 5 }} />
-              <Line type="monotone" dataKey="std" name="Std" stroke="#f59e0b" strokeWidth={1} dot={{ r: 3 }} activeDot={{ r: 5 }} />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
-      </Panel>
+          </Panel>
+        </>
+      ) : (
+        <>
+          {/* Energy Usage Chart */}
+          <Panel
+            className="!p-4"
+            title={
+              <div className="flex items-start gap-2">
+                <LineChartIcon className="size-5 text-[#3b82f6] mt-0.5" />
+                <div className="flex flex-col">
+                  <span className="font-bold text-[#0f284a] dark:text-foreground">Energy Usage</span>
+                  <span className="text-xs font-normal text-muted-foreground">{metric} breakdown (WBP, LWBP) with Max and Std limits</span>
+                </div>
+              </div>
+            }
+            action={
+              <div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">{metric}</div>
+            }
+          >
+            <div className="mt-6 h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <ComposedChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="var(--border)" />
+                  <XAxis dataKey="day" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickMargin={10} />
+                  <YAxis 
+                    tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tickCount={5} 
+                    domain={maxDomain}
+                    tickFormatter={(v) => metric === "kWh" && v > 0 ? (v / 1000).toFixed(3) : v}
+                  />
+                  <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
+                  <Legend verticalAlign="bottom" height={36} iconType="square" wrapperStyle={{ fontSize: 12 }} />
+                  
+                  <Bar dataKey="wbp" name="WBP" fill="#10b981" barSize={12} stackId="a" />
+                  <Bar dataKey="lwbp" name="LWBP" fill="#a7f3d0" barSize={12} stackId="a" />
+                  <Line type="monotone" dataKey="max" name="Max" stroke="#ef4444" strokeWidth={1} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+                  <Line type="monotone" dataKey="std" name="Std" stroke="#f59e0b" strokeWidth={1} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </div>
+          </Panel>
+
+          {/* LVMDP 01 Chart */}
+          <Panel
+            className="!p-4"
+            title={
+              <div className="flex items-start gap-2">
+                <LineChartIcon className="size-5 text-[#3b82f6] mt-0.5" />
+                <div className="flex flex-col">
+                  <span className="font-bold text-[#0f284a] dark:text-foreground">LVMDP 01</span>
+                  <span className="text-xs font-normal text-muted-foreground">Device-level {metric.toLowerCase()} and threshold trends</span>
+                </div>
+              </div>
+            }
+            action={
+              <div className="rounded bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">{metric}</div>
+            }
+          >
+            <div className="mt-6 h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <ComposedChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="var(--border)" />
+                  <XAxis dataKey="day" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickMargin={10} />
+                  <YAxis 
+                    tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tickCount={5} 
+                    domain={maxDomain}
+                    tickFormatter={(v) => metric === "kWh" && v > 0 ? (v / 1000).toFixed(3) : v}
+                  />
+                  <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
+                  <Legend verticalAlign="bottom" height={36} iconType="square" wrapperStyle={{ fontSize: 12 }} />
+                  
+                  <Bar dataKey="wbp" name="WBP" fill="#10b981" barSize={12} stackId="a" />
+                  <Bar dataKey="lwbp" name="LWBP" fill="#a7f3d0" barSize={12} stackId="a" />
+                  <Line type="monotone" dataKey="max" name="Max" stroke="#ef4444" strokeWidth={1} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+                  <Line type="monotone" dataKey="std" name="Std" stroke="#f59e0b" strokeWidth={1} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </div>
+          </Panel>
+        </>
+      )}
     </div>
   );
 }
