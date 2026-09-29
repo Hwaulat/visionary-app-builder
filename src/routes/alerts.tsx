@@ -37,7 +37,7 @@ function Alerts() {
       <Panel className="!p-0 overflow-hidden">
         {/* Toolbar */}
         <div className="flex flex-col gap-4 border-b p-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="relative flex-1 max-w-xl">
+          <div className="relative w-full flex-1 min-w-[200px]">
             <Search 
               value={q} 
               onChange={(e) => setQ(e.target.value)} 

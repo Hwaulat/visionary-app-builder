@@ -75,7 +75,7 @@ function UsersPage() {
       <div className="overflow-hidden rounded-xl border bg-card shadow-sm">
         {/* Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b p-4">
-          <div className="relative w-full max-w-sm">
+          <div className="relative w-full flex-1 min-w-[200px]">
             <Search placeholder="Search by username or email" />
           </div>
           <div className="flex flex-wrap items-center gap-3">

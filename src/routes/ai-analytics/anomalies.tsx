@@ -82,7 +82,7 @@ function Anomalies() {
           <ChevronLeft className="size-4" />
           Back
         </Link>
-        <div className="relative w-64">
+        <div className="relative w-full flex-1 min-w-[200px]">
           <Search
             value={q}
             onChange={(e) => setQ(e.target.value)}
