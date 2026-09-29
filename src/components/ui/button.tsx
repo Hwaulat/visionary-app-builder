@@ -18,7 +18,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90",
+          "bg-[#1a4b8c] text-white hover:bg-[#143a70] dark:bg-[#1a4b8c] dark:text-white dark:hover:bg-[#143a70]",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/70 dark:hover:bg-destructive/80",
         outline:
@@ -33,9 +33,9 @@ const buttonVariants = cva(
         dangers:
           "text-red-500 bg-red-50 rounded-[8px] py-3 px-4 gap-2 dark:bg-red-900/20 dark:text-red-400",
         primary:
-          "text-white bg-blue-500 hover:bg-blue-600 rounded-[8px] px-4 gap-2 dark:bg-blue/50 dark:hover:bg-blue-700",
+          "text-white bg-[#1a4b8c] hover:bg-[#143a70] rounded-[8px] px-4 gap-2 dark:bg-[#1a4b8c]/80 dark:hover:bg-[#1a4b8c]",
         newPrimary:
-          "text-white bg-blue-500 rounded-[8px] py-3 px-4 gap-2 dark:bg-blue-600 dark:hover:bg-blue-700",
+          "text-white bg-[#1a4b8c] hover:bg-[#143a70] rounded-[8px] py-3 px-4 gap-2 dark:bg-[#1a4b8c]/90 dark:hover:bg-[#1a4b8c]",
         success:
           "text-white bg-green-50 text-green-500 dark:bg-green-900/20 dark:text-green-400",
         warning:
@@ -74,7 +74,7 @@ const buttonVariants = cva(
           "hover:bg-[linear-gradient(0deg,#ffffff33_0%,#ffffff33_100%),linear-gradient(283deg,#A31AF2_6%,#1874A5_97%)] hover:text-white",
           "active:bg-[linear-gradient(0deg,#00000033_0%,#00000033_100%),linear-gradient(283deg,#A31AF2_6%,#1874A5_97%)]",
         ].join(" "),
-        blue: "bg-blue-500 hover:bg-blue-600 text-white rounded-lg dark:bg-blue-600 dark:hover:bg-blue-700",
+        blue: "bg-[#1a4b8c] hover:bg-[#143a70] text-white rounded-lg dark:bg-[#1a4b8c]/90 dark:hover:bg-[#1a4b8c]",
         lightBlue:
           "bg-primary-50 text-primary-500 dark:bg-blue-900/20 dark:text-blue-400",
         icon: "p-2 rounded-lg border border-gray-300 hover:bg-gray-100 hover:border-gray-300 text-gray-400 data-[state=open]:bg-gray-100 data-[state=open]:border-gray-300 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:text-gray-400 dark:data-[state=open]:bg-gray-700 dark:data-[state=open]:border-gray-600",
