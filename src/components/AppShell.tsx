@@ -42,10 +42,7 @@ const groups: { title: string; items: Item[] }[] = [
   {
     title: "Setup System",
     items: [
-      // { label: "Master Data", icon: Database, children: [
-      //   { label: "Overview", to: "/master-data" },
-      //   { label: "Device", to: "/master-data/device" },
-      // ] },
+      { label: "Master Data", icon: Database },
       { label: "Users Management", to: "/users", icon: Users },
     ],
   },
@@ -123,8 +120,18 @@ export function AppShell({ children }: { children: ReactNode }) {
                     </div>
                   );
                 }
+                if (!it.to) {
+                  return (
+                    <div key={it.label} className={`${cls} opacity-50 cursor-default select-none`}>
+                      <Icon className="size-5 shrink-0" />
+                      {!collapsed && <span className="flex-1">{it.label}</span>}
+                      {!collapsed && it.badge ? <span className="grid size-5 place-items-center rounded-full bg-sidebar-primary text-[11px] text-sidebar-primary-foreground">{it.badge}</span> : null}
+                    </div>
+                  );
+                }
+
                 return (
-                  <Link key={it.label} to={it.to!} className={cls}>
+                  <Link key={it.label} to={it.to} className={cls}>
                     <Icon className="size-5 shrink-0" />
                     {!collapsed && <span className="flex-1">{it.label}</span>}
                     {!collapsed && it.badge ? <span className="grid size-5 place-items-center rounded-full bg-sidebar-primary text-[11px] text-sidebar-primary-foreground">{it.badge}</span> : null}
