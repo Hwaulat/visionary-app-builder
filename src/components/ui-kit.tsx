@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { SelectInput } from "@/components/ui/custom-select";
 import type { LucideIcon } from "lucide-react";
 import { Info } from "lucide-react";
 
@@ -73,9 +74,12 @@ export function Segmented<T extends string>({ value, options, onChange }: { valu
 
 export function FilterSelect({ options, value, onChange }: { options: string[]; value: string; onChange: (v: string) => void }) {
   return (
-    <select value={value} onChange={(e) => onChange(e.target.value)} className="h-10 min-w-44 rounded-lg border bg-card px-3 text-sm text-muted-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-ring">
-      {options.map((o) => <option key={o}>{o}</option>)}
-    </select>
+    <SelectInput
+      containerClassName="w-44"
+      defValue={value}
+      onChange={(val) => onChange(val as string)}
+      datalist={options.map((o) => ({ label: o, value: o }))}
+    />
   );
 }
 

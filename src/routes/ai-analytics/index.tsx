@@ -25,6 +25,7 @@ import {
   RadialBarChart,
   RadialBar,
 } from "recharts";
+import { SelectInput } from "@/components/ui/custom-select";
 import { PageHeader, Panel, StatCard, Pill, healthTone } from "@/components/ui-kit";
 import { machines } from "@/lib/mock";
 import {
@@ -163,15 +164,12 @@ function AIAnalyticsIndex() {
       {/* Bottom row: health trend + upcoming alerts */}
       <div className="grid gap-5 lg:grid-cols-5">
         <Panel title="Health Trend (30 days)" className="lg:col-span-3" action={
-          <select
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-            className="h-9 rounded-lg border bg-card px-3 text-sm shadow-sm"
-          >
-            {machines.map((m) => (
-              <option key={m.id} value={m.id}>{m.id} · {m.name}</option>
-            ))}
-          </select>
+          <SelectInput
+            containerClassName="w-48"
+            defValue={selected}
+            onChange={(val) => setSelected(val as string)}
+            datalist={machines.map((m) => ({ label: `${m.id} · ${m.name}`, value: m.id }))}
+          />
         }>
           <div className="h-72">
             <ResponsiveContainer>

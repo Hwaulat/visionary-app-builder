@@ -17,6 +17,7 @@ import {
   ArrowUpDown,
 } from "lucide-react";
 import { Search } from "@/components/ui/search";
+import { SelectInput } from "@/components/ui/custom-select";
 import { users as seed, type User } from "@/lib/mock";
 import { Tabs } from "@/components/ui/custom-tabs";
 
@@ -78,15 +79,9 @@ function UsersPage() {
             <Search placeholder="Search by username or email" />
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <select className="appearance-none rounded-lg border bg-background py-2 pl-3 pr-8 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
-              <option>All Role</option>
-            </select>
-            <select className="appearance-none rounded-lg border bg-background py-2 pl-3 pr-8 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
-              <option>All Department</option>
-            </select>
-            <select className="appearance-none rounded-lg border bg-background py-2 pl-3 pr-8 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
-              <option>All Position</option>
-            </select>
+            <SelectInput containerClassName="w-40" datalist={[{ label: "All Role", value: "All Role" }]} defValue="All Role" />
+            <SelectInput containerClassName="w-44" datalist={[{ label: "All Department", value: "All Department" }]} defValue="All Department" />
+            <SelectInput containerClassName="w-40" datalist={[{ label: "All Position", value: "All Position" }]} defValue="All Position" />
             <button className="flex items-center gap-2 rounded-lg bg-[#1a4b8c] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#153a6d]">
               <Plus className="size-4" />
               Create New User
@@ -209,11 +204,11 @@ function UsersPage() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <span>Rows per page</span>
-              <select className="rounded-md border bg-background px-2 py-1 outline-none focus:border-primary focus:ring-1 focus:ring-primary">
-                <option>10</option>
-                <option>20</option>
-                <option>50</option>
-              </select>
+              <SelectInput
+                containerClassName="w-20"
+                datalist={[{ label: "10", value: "10" }, { label: "20", value: "20" }, { label: "50", value: "50" }]}
+                defValue="10"
+              />
             </div>
             <span>
               1-{rows.length} of {rows.length}

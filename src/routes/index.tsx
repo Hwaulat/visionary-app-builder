@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DollarSign, Zap, Wind, TrendingUp } from "lucide-react";
 import { Bar, ComposedChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts";
 import { Panel, StatCard } from "@/components/ui-kit";
+import { SelectInput } from "@/components/ui/custom-select";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -86,12 +87,8 @@ function General() {
         }
         action={
           <div className="flex items-center gap-3">
-            <select className="h-9 min-w-32 rounded-md border bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
-              <option>All Device</option>
-            </select>
-            <select className="h-9 w-24 rounded-md border bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
-              <option>2026</option>
-            </select>
+            <SelectInput containerClassName="w-32" datalist={[{ label: "All Device", value: "All Device" }]} defValue="All Device" />
+            <SelectInput containerClassName="w-24" datalist={[{ label: "2026", value: "2026" }]} defValue="2026" />
           </div>
         }
       >
@@ -140,12 +137,8 @@ function General() {
         }
         action={
           <div className="flex items-center gap-3">
-            <select className="h-9 min-w-32 rounded-md border bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
-              <option>All Device</option>
-            </select>
-            <select className="h-9 w-24 rounded-md border bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
-              <option>2026</option>
-            </select>
+            <SelectInput containerClassName="w-32" datalist={[{ label: "All Device", value: "All Device" }]} defValue="All Device" />
+            <SelectInput containerClassName="w-24" datalist={[{ label: "2026", value: "2026" }]} defValue="2026" />
           </div>
         }
       >
@@ -184,9 +177,7 @@ function General() {
         title={
           <div className="flex items-center gap-3">
             <span className="font-semibold text-foreground">Device</span>
-            <select className="h-9 min-w-32 rounded-md border bg-background px-3 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">
-              <option>LVMDP01</option>
-            </select>
+            <SelectInput containerClassName="w-32" datalist={[{ label: "LVMDP01", value: "LVMDP01" }]} defValue="LVMDP01" />
           </div>
         }
       >

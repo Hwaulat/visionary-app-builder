@@ -3,6 +3,7 @@ import { useState } from "react";
 import { TriangleAlert, Calendar, Download, ChevronsUpDown, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { PageHeader, Panel } from "@/components/ui-kit";
 import { Search } from "@/components/ui/search";
+import { SelectInput } from "@/components/ui/custom-select";
 
 export const Route = createFileRoute("/alerts")({
   head: () => ({
@@ -45,9 +46,7 @@ function Alerts() {
           </div>
           
           <div className="flex items-center gap-3">
-            <select className="h-9 rounded-md border bg-background px-3 text-sm shadow-sm outline-none w-36 text-muted-foreground">
-              <option>Filter Priority</option>
-            </select>
+            <SelectInput containerClassName="w-36" datalist={[{ label: "Filter Priority", value: "Filter Priority" }]} defValue="Filter Priority" />
             
             <button className="flex items-center gap-2 rounded-md border bg-background px-3 h-9 text-sm shadow-sm text-muted-foreground hover:bg-muted/50 transition">
               <Calendar className="size-4" />
@@ -110,9 +109,11 @@ function Alerts() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <span>Rows per page</span>
-              <select className="h-8 rounded-md border bg-background px-2 py-1 outline-none text-foreground shadow-sm">
-                <option>10</option>
-              </select>
+              <SelectInput
+                containerClassName="w-20"
+                datalist={[{ label: "10", value: "10" }]}
+                defValue="10"
+              />
             </div>
             <span>1-10 of 36</span>
           </div>
