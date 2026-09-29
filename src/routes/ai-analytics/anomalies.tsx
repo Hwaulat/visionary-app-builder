@@ -75,13 +75,7 @@ function Anomalies() {
   return (
     <div className="space-y-5">
       <PageHeader icon={AlertTriangle} title="Anomaly Detection">
-        <Link
-          to="/ai-analytics"
-          className="flex h-10 items-center gap-2 rounded-lg border bg-card px-3 text-sm shadow-sm transition hover:bg-muted"
-        >
-          <ChevronLeft className="size-4" />
-          Back
-        </Link>
+
         <div className="relative w-full flex-1 min-w-[200px]">
           <Search
             value={q}

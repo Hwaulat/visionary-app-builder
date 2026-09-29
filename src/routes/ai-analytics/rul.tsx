@@ -50,13 +50,7 @@ function RULPage() {
   return (
     <div className="space-y-5">
       <PageHeader icon={Hourglass} title="RUL Estimation">
-        <Link
-          to="/ai-analytics"
-          className="flex h-10 items-center gap-2 rounded-lg border bg-card px-3 text-sm shadow-sm transition hover:bg-muted"
-        >
-          <ChevronLeft className="size-4" />
-          Back
-        </Link>
+
         <FilterSelect
           value={machineId}
           onChange={setMachineId}
