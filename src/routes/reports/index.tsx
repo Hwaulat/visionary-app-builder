@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Eye, Calendar, Download, ChevronsUpDown, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { Line, LineChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts";
 import { PageHeader, Panel } from "@/components/ui-kit";
+import { Search } from "@/components/ui/search";
 import { SelectInput } from "@/components/ui/custom-select";
 
 export const Route = createFileRoute("/reports/")({
@@ -39,6 +40,7 @@ function Reports() {
   const [deviceChart, setDeviceChart] = useState("LVMDP01");
   const [metricChart, setMetricChart] = useState("P (KWh)");
   const [deviceTable, setDeviceTable] = useState("LVMDP01");
+  const [q, setQ] = useState("");
 
   return (
     <div className="space-y-6 pb-10">
@@ -91,21 +93,30 @@ function Reports() {
       {/* Bottom Panel - Table */}
       <Panel className="!p-0 overflow-hidden">
         {/* Table Toolbar */}
-        <div className="flex items-center justify-end gap-3 border-b p-4">
-          <SelectInput
-            containerClassName="w-32"
-            defValue={deviceTable}
-            onChange={(val) => setDeviceTable(val as string)}
-            datalist={[{ label: "LVMDP01", value: "LVMDP01" }]}
-          />
-          <button className="flex items-center gap-2 rounded-md border bg-background px-3 h-9 text-sm text-muted-foreground shadow-sm hover:bg-muted/50 transition">
-            <Calendar className="size-4" />
-            <span>Select date range</span>
-          </button>
-          <button className="flex items-center gap-2 rounded-md bg-[#1a4b8c] px-4 h-9 text-sm font-medium text-white shadow-sm hover:bg-[#153a6d] transition">
-            <Download className="size-4" />
-            <span>Download Excel</span>
-          </button>
+        <div className="flex flex-col gap-4 border-b p-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="relative w-full flex-1 min-w-[200px]">
+            <Search 
+              value={q} 
+              onChange={(e) => setQ(e.target.value)} 
+              placeholder="Search reports..." 
+            />
+          </div>
+          <div className="flex items-center gap-3">
+            <SelectInput
+              containerClassName="w-32"
+              defValue={deviceTable}
+              onChange={(val) => setDeviceTable(val as string)}
+              datalist={[{ label: "LVMDP01", value: "LVMDP01" }]}
+            />
+            <button className="flex items-center gap-2 rounded-md border bg-background px-3 h-9 text-sm text-muted-foreground shadow-sm hover:bg-muted/50 transition">
+              <Calendar className="size-4" />
+              <span>Select date range</span>
+            </button>
+            <button className="flex items-center gap-2 rounded-md bg-[#1a4b8c] px-4 h-9 text-sm font-medium text-white shadow-sm hover:bg-[#153a6d] transition">
+              <Download className="size-4" />
+              <span>Download Excel</span>
+            </button>
+          </div>
         </div>
 
         {/* Table Data */}
