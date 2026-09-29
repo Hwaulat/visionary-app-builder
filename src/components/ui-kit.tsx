@@ -46,7 +46,7 @@ export function StatCard({ label, value, unit, icon: Icon, tone, hint, subtext }
         </div>
         <div className={`grid size-8 place-items-center rounded-full ${tones[tone]}`}><Icon className="size-4" /></div>
       </div>
-      <div className="mt-4 text-2xl font-bold tabular-nums">
+      <div className="mt-2 text-2xl font-bold tabular-nums">
         {value} {unit && <span className="text-sm font-medium text-muted-foreground">{unit}</span>}
       </div>
       {subtext && <div className="mt-1 text-xs text-muted-foreground">{subtext}</div>}
