@@ -30,7 +30,7 @@ import { PageHeader, Panel, StatCard, Pill, healthTone } from "@/components/ui-k
 import { machines } from "@/lib/mock";
 import {
   healthHistory,
-  fleetHealthDistribution,
+  machineHealthDistribution,
   forecastAlerts,
 } from "@/lib/mock-ai";
 
@@ -38,9 +38,9 @@ export const Route = createFileRoute("/ai-analytics/")({
   head: () => ({
     meta: [
       { title: "AI Analytics — EnergyIQ" },
-      { name: "description", content: "Fleet health overview, predictive insights and AI-driven analytics." },
+      { name: "description", content: "Machine health overview, predictive insights and AI-driven analytics." },
       { property: "og:title", content: "AI Analytics — EnergyIQ" },
-      { property: "og:description", content: "AI-powered fleet health overview and predictive insights." },
+      { property: "og:description", content: "AI-powered machine health overview and predictive insights." },
     ],
   }),
   component: AIAnalyticsIndex,
@@ -112,7 +112,7 @@ function AIAnalyticsIndex() {
   const [selected, setSelected] = useState(machines[2]!.id); // CHL-02
   const selectedMachine = machines.find((m) => m.id === selected)!;
   const history = healthHistory(selected);
-  const dist = fleetHealthDistribution();
+  const dist = machineHealthDistribution();
 
   const avgHealth = Math.round(machines.reduce((s, m) => s + m.health, 0) / machines.length);
   const criticalCount = machines.filter((m) => m.health < 50).length;
@@ -124,7 +124,7 @@ function AIAnalyticsIndex() {
 
       {/* KPI row */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Fleet Health" value={String(avgHealth)} unit="/ 100" icon={HeartPulse} tone="primary" hint="Average health across all monitored machines" />
+        <StatCard label="Machine Health" value={String(avgHealth)} unit="/ 100" icon={HeartPulse} tone="primary" hint="Average health across all monitored machines" />
         <StatCard label="Critical Machines" value={String(criticalCount)} icon={AlertTriangle} tone="destructive" hint="Health below 50" />
         <StatCard label="Watch List" value={String(watchCount)} icon={TrendingUp} tone="warning" hint="Health 50–79" />
         <StatCard label="Forecast Alerts" value={String(forecastAlerts.length)} icon={ShieldCheck} tone="info" hint="Metrics predicted to breach thresholds" />

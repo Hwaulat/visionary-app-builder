@@ -23,7 +23,7 @@ const groups: { title: string; items: Item[] }[] = [
     title: "AI & Predictive",
     items: [
       { label: "AI Analytics", icon: BrainCircuit, children: [
-        { label: "Fleet Overview", to: "/ai-analytics" },
+        { label: "Machine Overview", to: "/ai-analytics" },
         { label: "Forecasting", to: "/ai-analytics/forecasting" },
         { label: "RUL Estimation", to: "/ai-analytics/rul" },
         { label: "Anomaly Detection", to: "/ai-analytics/anomalies" },

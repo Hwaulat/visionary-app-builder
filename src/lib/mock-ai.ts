@@ -240,8 +240,8 @@ export function anomalyTimeline(): { day: string; high: number; medium: number; 
   }));
 }
 
-/* ── Fleet summary helpers ── */
-export function fleetHealthDistribution(): { range: string; count: number; tone: string }[] {
+/* ── Machine summary helpers ── */
+export function machineHealthDistribution(): { range: string; count: number; tone: string }[] {
   const ranges = [
     { range: "90–100", min: 90, tone: "success" },
     { range: "70–89", min: 70, tone: "primary" },

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { SelectInput } from "@/components/ui/custom-select";
 import type { LucideIcon } from "lucide-react";
 import { Info } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export function PageHeader({ icon: Icon, title, children }: { icon: LucideIcon; title: string; children?: ReactNode }) {
   return (
@@ -43,7 +44,18 @@ export function StatCard({ label, value, unit, icon: Icon, tone, hint, subtext }
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2 text-foreground/80 text-sm">
           {label}
-          {hint && <Info className="size-4 text-primary" aria-label={hint} />}
+          {hint && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="size-4 text-primary cursor-help outline-none" aria-label={hint} />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{hint}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </div>
         <div className={`grid size-8 place-items-center rounded-full ${tones[tone]}`}><Icon className="size-4" /></div>
       </div>

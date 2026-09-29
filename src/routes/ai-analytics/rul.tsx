@@ -194,8 +194,8 @@ function RULPage() {
         </div>
       </Panel>
 
-      {/* Fleet RUL ranking table */}
-      <Panel title="Fleet RUL Ranking">
+      {/* Machine RUL ranking table */}
+      <Panel title="Machine RUL Ranking">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">

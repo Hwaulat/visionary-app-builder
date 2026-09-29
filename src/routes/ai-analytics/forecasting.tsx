@@ -188,8 +188,8 @@ function Forecasting() {
         )}
       </Panel>
 
-      {/* All forecast alerts across fleet */}
-      <Panel title="Fleet-wide Forecast Alerts">
+      {/* All forecast alerts across machine */}
+      <Panel title="Machine-wide Forecast Alerts">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="text-left text-xs uppercase tracking-wide text-muted-foreground">
