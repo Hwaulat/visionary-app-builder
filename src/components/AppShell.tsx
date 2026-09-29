@@ -122,7 +122,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 }
                 if (!it.to) {
                   return (
-                    <div key={it.label} className={`${cls} opacity-50 cursor-default select-none`}>
+                    <div key={it.label} className={`${cls} cursor-default select-none`}>
                       <Icon className="size-5 shrink-0" />
                       {!collapsed && <span className="flex-1">{it.label}</span>}
                       {!collapsed && it.badge ? <span className="grid size-5 place-items-center rounded-full bg-sidebar-primary text-[11px] text-sidebar-primary-foreground">{it.badge}</span> : null}
