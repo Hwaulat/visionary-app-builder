@@ -118,13 +118,13 @@ const SelectInput = forwardRef<
         classNames={{
           control: () =>
             cn(
-              '!min-h-[36px] !px-3 border rounded-lg bg-background text-sm border-input',
+              '!min-h-[38px] !px-2 border rounded-xl bg-background text-sm text-slate-600 dark:text-slate-300 shadow-none border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600',
               hasError && 'bg-white border-destructive',
               disabled && 'bg-muted text-muted-foreground',
             ),
 
           menu: () =>
-            'mt-2 py-1 border rounded-lg text-sm border-border shadow-md bg-popover z-50',
+            'mt-2 py-1 border rounded-xl text-sm border-slate-200 dark:border-slate-700 shadow-md bg-popover z-50 overflow-hidden',
 
           multiValue: () => 'gap-1 py-1 px-2 mr-1 bg-muted rounded',
 
@@ -132,19 +132,21 @@ const SelectInput = forwardRef<
 
           option: ({ isFocused, isSelected }) =>
             cn(
-              '!flex items-center min-h-8 px-3 text-sm cursor-default hover:bg-accent hover:text-accent-foreground',
+              '!flex items-center min-h-8 px-3 text-sm cursor-default hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-100 transition-colors',
               (isFocused || isSelected) &&
-                'bg-accent text-accent-foreground',
+                'bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100',
             ),
 
           placeholder: ({ isDisabled }) =>
-            cn('text-muted-foreground', isDisabled && 'text-muted-foreground/50'),
+            cn('text-slate-400 dark:text-slate-500', isDisabled && 'opacity-50'),
 
           valueContainer: () => 'stroke-0 mr-2',
+          
+          indicatorSeparator: () => 'hidden',
 
-          clearIndicator: () => 'stroke-0 mr-1 text-muted-foreground cursor-pointer hover:text-foreground',
+          clearIndicator: () => 'stroke-0 mr-1 text-slate-400 cursor-pointer hover:text-slate-600',
 
-          dropdownIndicator: () => 'stroke-0 mr-0 text-muted-foreground cursor-pointer hover:text-foreground',
+          dropdownIndicator: () => 'stroke-0 mr-0 p-1 text-slate-400 cursor-pointer hover:text-slate-600',
         }}
         {...props}
       />
