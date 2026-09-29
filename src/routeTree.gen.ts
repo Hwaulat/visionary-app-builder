@@ -19,6 +19,7 @@ import { Route as AiAnalyticsForecastingRouteImport } from './routes/ai-analytic
 import { Route as AiAnalyticsRulRouteImport } from './routes/ai-analytics/rul'
 import { Route as DashboardDetailsRouteImport } from './routes/dashboard/details'
 import { Route as DashboardRealtimeRouteImport } from './routes/dashboard/realtime'
+import { Route as MasterDataDeviceRouteImport } from './routes/master-data/device'
 import { Route as ReportsIndexRouteImport } from './routes/reports/index'
 import { Route as ReportsSummaryRouteImport } from './routes/reports/summary'
 
@@ -72,6 +73,11 @@ const DashboardRealtimeRoute = DashboardRealtimeRouteImport.update({
   path: '/dashboard/realtime',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MasterDataDeviceRoute = MasterDataDeviceRouteImport.update({
+  id: '/device',
+  path: '/device',
+  getParentRoute: () => MasterDataRoute,
+} as any)
 const ReportsIndexRoute = ReportsIndexRouteImport.update({
   id: '/reports/',
   path: '/reports/',
@@ -86,13 +92,14 @@ const ReportsSummaryRoute = ReportsSummaryRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
-  '/master-data': typeof MasterDataRoute
+  '/master-data': typeof MasterDataRouteWithChildren
   '/users': typeof UsersRoute
   '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
   '/ai-analytics/forecasting': typeof AiAnalyticsForecastingRoute
   '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/master-data/device': typeof MasterDataDeviceRoute
   '/reports/summary': typeof ReportsSummaryRoute
   '/ai-analytics/': typeof AiAnalyticsIndexRoute
   '/reports/': typeof ReportsIndexRoute
@@ -100,13 +107,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
-  '/master-data': typeof MasterDataRoute
+  '/master-data': typeof MasterDataRouteWithChildren
   '/users': typeof UsersRoute
   '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
   '/ai-analytics/forecasting': typeof AiAnalyticsForecastingRoute
   '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/master-data/device': typeof MasterDataDeviceRoute
   '/reports/summary': typeof ReportsSummaryRoute
   '/ai-analytics': typeof AiAnalyticsIndexRoute
   '/reports': typeof ReportsIndexRoute
@@ -115,13 +123,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
-  '/master-data': typeof MasterDataRoute
+  '/master-data': typeof MasterDataRouteWithChildren
   '/users': typeof UsersRoute
   '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
   '/ai-analytics/forecasting': typeof AiAnalyticsForecastingRoute
   '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/master-data/device': typeof MasterDataDeviceRoute
   '/reports/summary': typeof ReportsSummaryRoute
   '/ai-analytics/': typeof AiAnalyticsIndexRoute
   '/reports/': typeof ReportsIndexRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
+    | '/master-data/device'
     | '/reports/summary'
     | '/ai-analytics/'
     | '/reports/'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
+    | '/master-data/device'
     | '/reports/summary'
     | '/ai-analytics'
     | '/reports'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
+    | '/master-data/device'
     | '/reports/summary'
     | '/ai-analytics/'
     | '/reports/'
@@ -174,7 +186,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlertsRoute: typeof AlertsRoute
-  MasterDataRoute: typeof MasterDataRoute
+  MasterDataRoute: typeof MasterDataRouteWithChildren
   UsersRoute: typeof UsersRoute
   AiAnalyticsAnomaliesRoute: typeof AiAnalyticsAnomaliesRoute
   AiAnalyticsForecastingRoute: typeof AiAnalyticsForecastingRoute
@@ -258,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRealtimeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/master-data/device': {
+      id: '/master-data/device'
+      path: '/device'
+      fullPath: '/master-data/device'
+      preLoaderRoute: typeof MasterDataDeviceRouteImport
+      parentRoute: typeof MasterDataRoute
+    }
     '/reports/': {
       id: '/reports/'
       path: '/reports'
@@ -275,10 +294,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface MasterDataRouteChildren {
+  MasterDataDeviceRoute: typeof MasterDataDeviceRoute
+}
+
+const MasterDataRouteChildren: MasterDataRouteChildren = {
+  MasterDataDeviceRoute: MasterDataDeviceRoute,
+}
+
+const MasterDataRouteWithChildren = MasterDataRoute._addFileChildren(
+  MasterDataRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlertsRoute: AlertsRoute,
-  MasterDataRoute: MasterDataRoute,
+  MasterDataRoute: MasterDataRouteWithChildren,
   UsersRoute: UsersRoute,
   AiAnalyticsAnomaliesRoute: AiAnalyticsAnomaliesRoute,
   AiAnalyticsForecastingRoute: AiAnalyticsForecastingRoute,

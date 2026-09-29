@@ -42,7 +42,10 @@ const groups: { title: string; items: Item[] }[] = [
   {
     title: "Setup System",
     items: [
-      { label: "Master Data", to: "/master-data", icon: Database },
+      { label: "Master Data", icon: Database, children: [
+        { label: "Overview", to: "/master-data" },
+        { label: "Device", to: "/master-data/device" },
+      ] },
       { label: "Users Management", to: "/users", icon: Users },
     ],
   },
