@@ -1,8 +1,9 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import {
-  LayoutGrid, ChevronDown, FileBarChart, BellRing, Database, Users, Bot, PanelLeft, Moon, Sun, Bell, Zap, BrainCircuit,
+  LayoutGrid, ChevronDown, FileBarChart, BellRing, Database, Users, PanelLeft, Moon, Sun, Bell, Zap, BrainCircuit,
 } from "lucide-react";
+import { FloatingAssistant } from "./FloatingAssistant";
 
 type Item = { label: string; to?: string; icon: typeof LayoutGrid; children?: { label: string; to: string }[]; badge?: number };
 
@@ -27,7 +28,6 @@ const groups: { title: string; items: Item[] }[] = [
         { label: "RUL Estimation", to: "/ai-analytics/rul" },
         { label: "Anomaly Detection", to: "/ai-analytics/anomalies" },
       ] },
-      { label: "AI Assistant", to: "/assistant", icon: Bot },
     ],
   },
   {
@@ -162,6 +162,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </header>
         <main className="flex-1 p-6">{children}</main>
       </div>
+      <FloatingAssistant />
     </div>
   );
 }

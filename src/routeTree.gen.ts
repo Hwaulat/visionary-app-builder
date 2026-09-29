@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlertsRouteImport } from './routes/alerts'
-import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as MasterDataRouteImport } from './routes/master-data'
 import { Route as UsersRouteImport } from './routes/users'
 import { Route as AiAnalyticsIndexRouteImport } from './routes/ai-analytics/index'
@@ -31,11 +30,6 @@ const IndexRoute = IndexRouteImport.update({
 const AlertsRoute = AlertsRouteImport.update({
   id: '/alerts',
   path: '/alerts',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AssistantRoute = AssistantRouteImport.update({
-  id: '/assistant',
-  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MasterDataRoute = MasterDataRouteImport.update({
@@ -92,7 +86,6 @@ const ReportsSummaryRoute = ReportsSummaryRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
-  '/assistant': typeof AssistantRoute
   '/master-data': typeof MasterDataRoute
   '/users': typeof UsersRoute
   '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
@@ -107,7 +100,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
-  '/assistant': typeof AssistantRoute
   '/master-data': typeof MasterDataRoute
   '/users': typeof UsersRoute
   '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
@@ -123,7 +115,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alerts': typeof AlertsRoute
-  '/assistant': typeof AssistantRoute
   '/master-data': typeof MasterDataRoute
   '/users': typeof UsersRoute
   '/ai-analytics/anomalies': typeof AiAnalyticsAnomaliesRoute
@@ -140,7 +131,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/alerts'
-    | '/assistant'
     | '/master-data'
     | '/users'
     | '/ai-analytics/anomalies'
@@ -155,7 +145,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/alerts'
-    | '/assistant'
     | '/master-data'
     | '/users'
     | '/ai-analytics/anomalies'
@@ -170,7 +159,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/alerts'
-    | '/assistant'
     | '/master-data'
     | '/users'
     | '/ai-analytics/anomalies'
@@ -186,7 +174,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlertsRoute: typeof AlertsRoute
-  AssistantRoute: typeof AssistantRoute
   MasterDataRoute: typeof MasterDataRoute
   UsersRoute: typeof UsersRoute
   AiAnalyticsAnomaliesRoute: typeof AiAnalyticsAnomaliesRoute
@@ -213,13 +200,6 @@ declare module '@tanstack/react-router' {
       path: '/alerts'
       fullPath: '/alerts'
       preLoaderRoute: typeof AlertsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/assistant': {
-      id: '/assistant'
-      path: '/assistant'
-      fullPath: '/assistant'
-      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/master-data': {
@@ -298,7 +278,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlertsRoute: AlertsRoute,
-  AssistantRoute: AssistantRoute,
   MasterDataRoute: MasterDataRoute,
   UsersRoute: UsersRoute,
   AiAnalyticsAnomaliesRoute: AiAnalyticsAnomaliesRoute,
