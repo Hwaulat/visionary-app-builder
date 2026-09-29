@@ -19,6 +19,15 @@ function Summary() {
   const [period, setPeriod] = useState<"Daily" | "Monthly" | "Yearly">("Monthly");
 
   const chartData = useMemo(() => {
+    if (metric === "kVArh") {
+      return Array.from({ length: 30 }, (_, i) => {
+        const day = `${String(i + 1).padStart(2, '0')} Sep`;
+        return {
+          day,
+          val: Math.random() * 2 + 1, // values between 1 and 3
+        };
+      });
+    }
     if (metric === "kWh") {
       return Array.from({ length: 30 }, (_, i) => {
         const day = `${String(i + 1).padStart(2, '0')} Sep`;
@@ -35,7 +44,7 @@ function Summary() {
         };
       });
     }
-    // Default dummy for Cost / kVArh
+    // Default dummy for Cost
     return Array.from({ length: 30 }, (_, i) => ({
       day: `${String(i + 1).padStart(2, '0')} Sep`,
       wbp: Math.random() * 1.5 + 0.5,
@@ -91,28 +100,28 @@ function Summary() {
                   <div className="grid size-6 place-items-center rounded bg-[#10b981] text-white"><LineChartIcon className="size-3.5" /></div>
                   Average (kVArh)
                 </div>
-                <div className="text-xl font-bold">0</div>
+                <div className="text-xl font-bold">1.25</div>
               </div>
               <div className="flex flex-col gap-2 rounded-lg border p-4">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
                   <div className="grid size-6 place-items-center rounded bg-[#10b981] text-white"><LineChartIcon className="size-3.5" /></div>
                   Total (kVArh)
                 </div>
-                <div className="text-xl font-bold">0</div>
+                <div className="text-xl font-bold">382.4</div>
               </div>
               <div className="flex flex-col gap-2 rounded-lg border p-4">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
                   <div className="grid size-6 place-items-center rounded bg-[#10b981] text-white"><span className="text-xs font-bold">$</span></div>
                   Average Cost (IDR)
                 </div>
-                <div className="text-xl font-bold">0</div>
+                <div className="text-xl font-bold">485,200</div>
               </div>
               <div className="flex flex-col gap-2 rounded-lg border p-4">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
                   <div className="grid size-6 place-items-center rounded bg-[#10b981] text-white"><span className="text-xs font-bold">$</span></div>
                   Cost Total (IDR)
                 </div>
-                <div className="text-xl font-bold">0</div>
+                <div className="text-xl font-bold">14,556,000</div>
               </div>
             </div>
           </div>
@@ -137,6 +146,8 @@ function Summary() {
                   <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="var(--border)" />
                   <XAxis dataKey="day" tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickMargin={10} />
                   <YAxis tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickCount={5} domain={[0, 4]} />
+                  <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }} />
+                  <Bar dataKey="val" name="Reactive Energy" fill="#10b981" barSize={12} radius={[2,2,0,0]} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
