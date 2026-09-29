@@ -135,7 +135,7 @@ const SelectInput = forwardRef<
         classNames={{
           control: () =>
             cn(
-              '!min-h-[38px] !px-3 border-2 rounded-full bg-slate-100 dark:bg-slate-800 text-sm text-slate-500 font-medium shadow-none border-transparent hover:bg-slate-200/50 hover:border-slate-200 dark:border-transparent dark:hover:border-slate-600 focus-within:bg-white focus-within:border-blue-500 dark:focus-within:border-blue-500 transition-colors',
+              '!min-h-[38px] !px-3 border rounded-lg bg-white dark:bg-slate-800 text-sm text-slate-500 font-medium shadow-none border-slate-200 hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600 focus-within:border-blue-500 dark:focus-within:border-blue-500 transition-colors',
               hasError && 'bg-white border-destructive',
               disabled && 'opacity-60 cursor-not-allowed',
             ),
