@@ -71,10 +71,25 @@ export const alerts: Alert[] = [
   { id: "AL-1036", time: "2026-09-28 14:40", machine: "CMP-01", metric: "kWh", value: "+18% vs baseline", type: "threshold", severity: "warning", status: "acknowledged", ackBy: "rudi.h" },
 ];
 
-export const users = [
-  { name: "Admin", email: "admin@plant.co.id", role: "Admin", active: true, last: "Today 09:31" },
-  { name: "Rudi Hartono", email: "rudi.h@plant.co.id", role: "Engineer", active: true, last: "Today 08:40" },
-  { name: "Sari Wulandari", email: "sari.w@plant.co.id", role: "Manager", active: true, last: "Yesterday" },
-  { name: "Budi Santoso", email: "budi.s@plant.co.id", role: "Viewer", active: true, last: "3 days ago" },
-  { name: "Dewi Lestari", email: "dewi.l@plant.co.id", role: "Engineer", active: false, last: "2 months ago" },
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  department: string;
+  position: string;
+  phone: string;
+  city: string;
+  country: string;
+  active: boolean;
+};
+
+export const users: User[] = [
+  { id: "U1", name: "Khanan", email: "khanan@mail.com", role: "Operator", department: "MECHANICAL - ENTRY", position: "Operator", phone: "085710484690", city: "BEKASI", country: "INDONESIA", active: true },
+  { id: "U2", name: "Heri Kiswanto", email: "heri-kiswanto@jsgi.co.id", role: "Group Head", department: "MECHANICAL - TECHNOLOGY", position: "Manager", phone: "0813-8236-2977", city: "BEKASI", country: "INDONESIA", active: true },
+  { id: "U3", name: "Admin", email: "admin@plant.co.id", role: "Admin", department: "IT", position: "Administrator", phone: "0812-3456-7890", city: "JAKARTA", country: "INDONESIA", active: true },
+  { id: "U4", name: "Rudi Hartono", email: "rudi.h@plant.co.id", role: "Engineer", department: "ELECTRICAL - MAINTENANCE", position: "Engineer", phone: "0821-2345-6789", city: "BANDUNG", country: "INDONESIA", active: true },
+  { id: "U5", name: "Sari Wulandari", email: "sari.w@plant.co.id", role: "Manager", department: "PRODUCTION", position: "Manager", phone: "0811-9876-5432", city: "BEKASI", country: "INDONESIA", active: true },
+  { id: "U6", name: "Budi Santoso", email: "budi.s@plant.co.id", role: "Viewer", department: "MANAGEMENT", position: "Director", phone: "0815-1122-3344", city: "JAKARTA", country: "INDONESIA", active: true },
+  { id: "U7", name: "Dewi Lestari", email: "dewi.l@plant.co.id", role: "Operator", department: "QUALITY CONTROL", position: "Inspector", phone: "0813-5566-7788", city: "TANGERANG", country: "INDONESIA", active: true },
 ];
