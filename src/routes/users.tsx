@@ -243,7 +243,7 @@ function UsersPage() {
       </div>
 
       {/* Tabs Component */}
-      <Tabs items={tabsItems} variant="pill" className="inline-flex rounded-full border bg-card p-1 shadow-sm" />
+      <Tabs items={tabsItems} variant="solid" />
     </div>
   );
 }
