@@ -116,21 +116,6 @@ function UsersPage() {
                     Position <ArrowUpDown className="size-3" />
                   </div>
                 </th>
-                <th className="px-4 py-3 font-semibold uppercase">
-                  <div className="flex items-center gap-1 cursor-pointer hover:text-foreground">
-                    Phone <ArrowUpDown className="size-3" />
-                  </div>
-                </th>
-                <th className="px-4 py-3 font-semibold uppercase">
-                  <div className="flex items-center gap-1 cursor-pointer hover:text-foreground">
-                    City <ArrowUpDown className="size-3" />
-                  </div>
-                </th>
-                <th className="px-4 py-3 font-semibold uppercase">
-                  <div className="flex items-center gap-1 cursor-pointer hover:text-foreground">
-                    Country <ArrowUpDown className="size-3" />
-                  </div>
-                </th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -190,9 +175,6 @@ function UsersPage() {
                   <td className="px-4 py-3">{u.role}</td>
                   <td className="px-4 py-3">{u.department}</td>
                   <td className="px-4 py-3">{u.position}</td>
-                  <td className="px-4 py-3">{u.phone}</td>
-                  <td className="px-4 py-3">{u.city}</td>
-                  <td className="px-4 py-3">{u.country}</td>
                 </tr>
               ))}
             </tbody>
