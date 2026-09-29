@@ -39,8 +39,8 @@ function Realtime() {
       </PageHeader>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {machines.map((m, i) => {
-          const v = vals[i];
-          const breach = m.status !== "offline" && v.temp > LIMIT;
+          const v = vals[i] || { kw: "0", temp: "0", amp: "0" };
+          const breach = m.status !== "offline" && Number(v.temp) > LIMIT;
           const off = m.status === "offline";
           return (
             <div key={m.id} className={`rounded-xl bg-card p-5 shadow-sm ring-2 transition ${breach ? "ring-destructive" : "ring-transparent"} ${off ? "opacity-60" : ""}`}>

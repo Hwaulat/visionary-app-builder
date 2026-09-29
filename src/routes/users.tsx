@@ -3,7 +3,6 @@ import { useState } from "react";
 import {
   Users,
   Plus,
-  Search,
   Eye,
   RotateCcw,
   Pencil,
@@ -17,6 +16,7 @@ import {
   ChevronsRight,
   ArrowUpDown,
 } from "lucide-react";
+import { Search } from "@/components/ui/search";
 import { users as seed, type User } from "@/lib/mock";
 import { Tabs } from "@/components/ui/custom-tabs";
 
@@ -75,11 +75,7 @@ function UsersPage() {
         {/* Toolbar */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b p-4">
           <div className="relative w-full max-w-sm">
-            <Search className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
-            <input
-              placeholder="Search by username or email"
-              className="w-full rounded-lg border bg-background py-2 pl-9 pr-4 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary"
-            />
+            <Search placeholder="Search by username or email" />
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <select className="appearance-none rounded-lg border bg-background py-2 pl-3 pr-8 text-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary">

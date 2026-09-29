@@ -3,7 +3,6 @@ import { useMemo, useState } from "react";
 import {
   AlertTriangle,
   ChevronLeft,
-  Search,
   Activity,
   BarChart3,
   Clock,
@@ -20,6 +19,7 @@ import {
   YAxis,
   Legend,
 } from "recharts";
+import { Search } from "@/components/ui/search";
 import { PageHeader, Panel, FilterSelect, Pill, StatCard } from "@/components/ui-kit";
 import { anomalies, anomalyTimeline, type AnomalyEvent } from "@/lib/mock-ai";
 
@@ -82,13 +82,11 @@ function Anomalies() {
           <ChevronLeft className="size-4" />
           Back
         </Link>
-        <div className="relative">
-          <Search className="absolute left-3 top-3 size-4 text-muted-foreground" />
-          <input
+        <div className="relative w-64">
+          <Search
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search anomalies…"
-            className="h-10 rounded-lg border bg-card pl-9 pr-3 text-sm shadow-sm"
           />
         </div>
         <FilterSelect value={severity} onChange={setSeverity} options={["All Severity", "high", "medium", "low"]} />

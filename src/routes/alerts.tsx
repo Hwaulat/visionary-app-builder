@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Search, TriangleAlert, Calendar, Download, ChevronsUpDown, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { TriangleAlert, Calendar, Download, ChevronsUpDown, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { PageHeader, Panel } from "@/components/ui-kit";
+import { Search } from "@/components/ui/search";
 
 export const Route = createFileRoute("/alerts")({
   head: () => ({
@@ -36,12 +37,10 @@ function Alerts() {
         {/* Toolbar */}
         <div className="flex flex-col gap-4 border-b p-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="relative flex-1 max-w-xl">
-            <Search className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
-            <input 
+            <Search 
               value={q} 
               onChange={(e) => setQ(e.target.value)} 
               placeholder="Search Log Alert..." 
-              className="h-9 w-full rounded-md border bg-background pl-9 pr-3 text-sm shadow-sm outline-none transition focus:border-primary focus:ring-1 focus:ring-primary" 
             />
           </div>
           
