@@ -47,18 +47,15 @@ const rightMetrics = [
 function Details() {
   return (
     <div className="space-y-4 pb-10">
-      <PageHeader icon={ListOrdered} title="Details" />
-
-      {/* Top Filter Bar */}
-      <div className="flex items-center justify-end rounded-xl bg-card p-4 shadow-sm border">
-        <div className="flex items-center rounded border bg-background px-3 py-1.5 text-sm font-medium">
+      <PageHeader icon={ListOrdered} title="Details">
+        <div className="flex items-center rounded-lg border bg-card px-3 py-1.5 text-sm font-medium shadow-sm">
           <span className="mr-6">LVMDP01</span>
           <X className="size-3.5 text-muted-foreground mr-2 cursor-pointer" />
           <svg className="size-3.5 text-muted-foreground cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
-      </div>
+      </PageHeader>
 
       <div className="flex flex-col gap-4 lg:flex-row items-start">
         {/* Left Sidebar (Current & Voltage) */}
