@@ -16,6 +16,7 @@ export const Route = createFileRoute("/reports/summary")({
 
 function Summary() {
   const [metric, setMetric] = useState<"Cost" | "kWh" | "kVArh">("Cost");
+  const [period, setPeriod] = useState<"Daily" | "Monthly" | "Yearly">("Monthly");
 
   const chartData = useMemo(() => {
     if (metric === "kWh") {
@@ -49,22 +50,19 @@ function Summary() {
   return (
     <div className="space-y-6 pb-10">
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4">
         <div className="flex items-center gap-2 text-2xl font-bold text-[#0f284a] dark:text-foreground">
           <BarChart3 className="size-6" />
           <span>Summary</span>
         </div>
-        <Segmented value={metric} options={["Cost", "kWh", "kVArh"]} onChange={setMetric} />
+        <div className="flex flex-wrap items-center gap-3">
+          <Segmented value={metric} options={["Cost", "kWh", "kVArh"]} onChange={setMetric} />
+          <Segmented value={period} options={["Daily", "Monthly", "Yearly"]} onChange={setPeriod} />
+        </div>
       </div>
 
       {/* Filter Panel */}
       <div className="flex items-center gap-3 rounded-xl border bg-card p-3 shadow-sm">
-        <SelectInput
-          containerClassName="w-36"
-          defValue="Monthly"
-          onChange={() => {}}
-          datalist={[{ label: "Monthly", value: "Monthly" }]}
-        />
         <button className="flex items-center gap-2 rounded-md border bg-background px-4 h-10 text-sm shadow-sm transition hover:bg-muted/50 text-muted-foreground">
           <Calendar className="size-4" />
           <span>31/08/2026</span>
