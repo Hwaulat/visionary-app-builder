@@ -67,7 +67,7 @@ function Clock() {
 
 export function AppShell({ children }: { children: ReactNode }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [dark, setDark] = useState(false);
   const [open, setOpen] = useState<Record<string, boolean>>({ Dashboard: true, "AI Analytics": true, Reports: true });
 
