@@ -140,8 +140,10 @@ const SelectInput = forwardRef<
           placeholder: ({ isDisabled }) =>
             cn('text-slate-400 font-normal dark:text-slate-500', isDisabled && 'opacity-50'),
 
-          valueContainer: () => 'stroke-0 mr-2',
+          valueContainer: () => 'stroke-0 mr-2 flex-nowrap',
           
+          singleValue: () => 'text-slate-700 dark:text-slate-200 whitespace-nowrap overflow-visible',
+
           indicatorSeparator: () => 'hidden',
 
           clearIndicator: () => 'stroke-0 mr-1 text-slate-400 cursor-pointer hover:text-slate-600',
