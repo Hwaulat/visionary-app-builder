@@ -18,6 +18,7 @@ import {
   ArrowUpDown,
 } from "lucide-react";
 import { users as seed, type User } from "@/lib/mock";
+import { Tabs } from "@/components/ui/custom-tabs";
 
 export const Route = createFileRoute("/users")({
   head: () => ({
@@ -31,47 +32,13 @@ export const Route = createFileRoute("/users")({
 
 function UsersPage() {
   const [rows, setRows] = useState(seed);
-  const [activeTab, setActiveTab] = useState("User Account");
 
   const totalUsers = rows.length;
   const activeUsers = rows.filter((r) => r.active).length;
   const inactiveUsers = totalUsers - activeUsers;
 
-  return (
-    <div className="mx-auto max-w-7xl space-y-6 pb-10">
-      {/* Header */}
-      <div className="flex items-center gap-3">
-        <Users className="size-6 text-foreground" />
-        <div>
-          <h1 className="text-xl font-bold tracking-tight text-foreground">Users Management</h1>
-          <p className="text-sm text-muted-foreground">Manage users, roles, and permissions</p>
-        </div>
-      </div>
-
-      {/* Tabs */}
-      <div className="inline-flex items-center rounded-full border bg-card p-1 shadow-sm">
-        <button
-          onClick={() => setActiveTab("User Account")}
-          className={`rounded-full px-5 py-1.5 text-sm font-semibold transition-colors ${
-            activeTab === "User Account"
-              ? "bg-primary text-primary-foreground shadow"
-              : "text-muted-foreground hover:bg-muted"
-          }`}
-        >
-          User Account
-        </button>
-        <button
-          onClick={() => setActiveTab("Role Permission")}
-          className={`rounded-full px-5 py-1.5 text-sm font-semibold transition-colors ${
-            activeTab === "Role Permission"
-              ? "bg-primary text-primary-foreground shadow"
-              : "text-muted-foreground hover:bg-muted"
-          }`}
-        >
-          Role Permission
-        </button>
-      </div>
-
+  const userAccountContent = (
+    <div className="space-y-6">
       {/* KPI Cards */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="flex items-center gap-4 rounded-xl border bg-card p-5 shadow-sm">
@@ -275,6 +242,35 @@ function UsersPage() {
           </div>
         </div>
       </div>
+    </div>
+  );
+
+  const tabsItems = [
+    {
+      value: "user-account",
+      label: "User Account",
+      content: userAccountContent,
+    },
+    {
+      value: "role-permission",
+      label: "Role Permission",
+      content: <div className="py-10 text-center text-muted-foreground">Role permissions management is under construction.</div>,
+    },
+  ];
+
+  return (
+    <div className="mx-auto max-w-7xl space-y-6 pb-10">
+      {/* Header */}
+      <div className="flex items-center gap-3">
+        <Users className="size-6 text-foreground" />
+        <div>
+          <h1 className="text-xl font-bold tracking-tight text-foreground">Users Management</h1>
+          <p className="text-sm text-muted-foreground">Manage users, roles, and permissions</p>
+        </div>
+      </div>
+
+      {/* Tabs Component */}
+      <Tabs items={tabsItems} variant="pill" className="inline-flex rounded-full border bg-card p-1 shadow-sm" />
     </div>
   );
 }
