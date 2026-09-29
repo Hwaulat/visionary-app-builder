@@ -46,7 +46,7 @@ const costData = [
 function General() {
   return (
     <div className="space-y-5 pb-10">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
         <StatCard
           label="Electricity Cost"
           value="IDR 175.374.362.000"

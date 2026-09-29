@@ -38,9 +38,9 @@ export type Tone = keyof typeof tones;
 
 export function StatCard({ label, value, unit, icon: Icon, tone, hint, subtext }: { label: string; value: ReactNode; unit?: string; icon: LucideIcon; tone: Tone; hint?: string; subtext?: ReactNode }) {
   return (
-    <div className="rounded-xl bg-card p-5 shadow-sm transition-shadow hover:shadow-md">
+    <div className="rounded-xl bg-card p-4 shadow-sm transition-shadow hover:shadow-md">
       <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-2 text-foreground/80">
+        <div className="flex items-center gap-2 text-foreground/80 text-sm">
           {label}
           {hint && <Info className="size-4 text-primary" aria-label={hint} />}
         </div>
