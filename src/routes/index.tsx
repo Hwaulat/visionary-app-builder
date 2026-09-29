@@ -47,7 +47,9 @@ const costData = [
 function General() {
   return (
     <div className="space-y-5 pb-10">
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
+      <div>
+        <h2 className="mb-3 text-xl font-bold">Summary</h2>
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
         <StatCard
           label="Electricity Cost"
           value="IDR 175.374.362.000"
@@ -70,6 +72,7 @@ function General() {
           hint="Estimated carbon footprint"
           subtext="0,138 MegaTon CO2-e"
         />
+        </div>
       </div>
 
       <Panel
