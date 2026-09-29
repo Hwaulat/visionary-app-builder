@@ -59,7 +59,7 @@ function RULPage() {
       </PageHeader>
 
       {/* KPI row */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {/* <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard
           label="Current Health"
           value={String(machine.health)}
@@ -89,8 +89,7 @@ function RULPage() {
           tone="destructive"
           hint="RUL < 60 days"
         />
-      </div>
-
+      </div> */}
       {/* Selected machine details card */}
       <div className="grid gap-5 lg:grid-cols-3">
         <Panel className="lg:col-span-1">
