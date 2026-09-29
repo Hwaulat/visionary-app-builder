@@ -47,8 +47,8 @@ function UsersPage() {
     "AI Analytics - Anomaly Detection",
     "Reports - Overview",
     "Reports - Summary",
-    "Master Data - Overview",
-    "Master Data - Device",
+    // "Master Data - Overview",
+    // "Master Data - Device",
     "Users Management",
     "Log Alert",
   ];
