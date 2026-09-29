@@ -15,8 +15,8 @@ export const Route = createFileRoute("/")({
 });
 
 const monthlyData = [
-  { month: "Jan", value: 0, average: 0 },
-  { month: "Feb", value: 0, average: 0 },
+  { month: "Jan", value: 950000, average: 900000 },
+  { month: "Feb", value: 1100000, average: 1000000 },
   { month: "Mar", value: 3500000, average: 1000000 },
   { month: "Apr", value: 5000000, average: 2100000 },
   { month: "May", value: 5700000, average: 2800000 },
@@ -24,14 +24,14 @@ const monthlyData = [
   { month: "Jul", value: 600000, average: 2600000 },
   { month: "Aug", value: 1600000, average: 2500000 },
   { month: "Sep", value: 2466133, average: 2500000 },
-  { month: "Oct", value: 0, average: 2200000 },
-  { month: "Nov", value: 0, average: 2000000 },
-  { month: "Dec", value: 0, average: 1800000 },
+  { month: "Oct", value: 2300000, average: 2200000 },
+  { month: "Nov", value: 2150000, average: 2000000 },
+  { month: "Dec", value: 1850000, average: 1800000 },
 ];
 
 const costData = [
-  { month: "Jan", value: 0, average: 0 },
-  { month: "Feb", value: 0, average: 0 },
+  { month: "Jan", value: 75000000000, average: 70000000000 },
+  { month: "Feb", value: 85000000000, average: 80000000000 },
   { month: "Mar", value: 240000000000, average: 80000000000 },
   { month: "Apr", value: 360000000000, average: 150000000000 },
   { month: "May", value: 390000000000, average: 200000000000 },
@@ -39,9 +39,9 @@ const costData = [
   { month: "Jul", value: 40000000000, average: 190000000000 },
   { month: "Aug", value: 100000000000, average: 180000000000 },
   { month: "Sep", value: 175374362000, average: 175000000000 },
-  { month: "Oct", value: 0, average: 160000000000 },
-  { month: "Nov", value: 0, average: 140000000000 },
-  { month: "Dec", value: 0, average: 130000000000 },
+  { month: "Oct", value: 170000000000, average: 160000000000 },
+  { month: "Nov", value: 145000000000, average: 140000000000 },
+  { month: "Dec", value: 125000000000, average: 130000000000 },
 ];
 
 function General() {
@@ -190,8 +190,8 @@ function General() {
           {[
             { title: "kW", status: "OK", value: "111.01", min: "100", avg: "111.01", max: "120" },
             { title: "Voltage [v]", status: "NG", value: "227.2", min: "220", avg: "227.2", max: "240" },
-            { title: "kVAr", status: "OK", value: "0", min: "0", avg: "0", max: "0" },
-            { title: "kVA", status: "OK", value: "0", min: "0", avg: "0", max: "0" },
+            { title: "kVAr", status: "OK", value: "45.2", min: "40.1", avg: "46.5", max: "50.8" },
+            { title: "kVA", status: "OK", value: "155.8", min: "148.0", avg: "156.2", max: "162.5" },
             { title: "Current [A]", status: "NG", value: "183.47", min: "150.05", avg: "183.47", max: "199.92" },
             { title: "Frequency [Hz]", status: "NG", value: "49.73", min: "49", avg: "49.73", max: "50" },
           ].map((p, idx) => (

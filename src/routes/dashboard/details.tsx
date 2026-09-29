@@ -13,35 +13,35 @@ export const Route = createFileRoute("/dashboard/details")({
 });
 
 const currentItems = [
-  { label: "Current R", value: "0", unit: "A", status: "OK" },
-  { label: "Current S", value: "0", unit: "A", status: "OK" },
-  { label: "Current T", value: "0", unit: "A", status: "OK" },
+  { label: "Current R", value: "171,20", unit: "A", status: "OK" },
+  { label: "Current S", value: "174,50", unit: "A", status: "OK" },
+  { label: "Current T", value: "171,32", unit: "A", status: "OK" },
   { label: "Current Avg", value: "172,34", unit: "A", status: "NG" },
 ];
 
 const voltageItems = [
   { label: "Voltage R-S", value: "238,31", unit: "V", status: "OK" },
-  { label: "Voltage S-T", value: "0", unit: "V", status: "OK" },
-  { label: "Voltage T-R", value: "0", unit: "V", status: "OK" },
-  { label: "Voltage R-N", value: "0", unit: "V", status: "OK" },
-  { label: "Voltage S-N", value: "0", unit: "V", status: "OK" },
-  { label: "Voltage T-N", value: "0", unit: "V", status: "OK" },
+  { label: "Voltage S-T", value: "237,80", unit: "V", status: "OK" },
+  { label: "Voltage T-R", value: "239,10", unit: "V", status: "OK" },
+  { label: "Voltage R-N", value: "220,15", unit: "V", status: "OK" },
+  { label: "Voltage S-N", value: "219,80", unit: "V", status: "OK" },
+  { label: "Voltage T-N", value: "221,05", unit: "V", status: "OK" },
   { label: "Voltage Avg", value: "238,31", unit: "V", status: "OK" },
 ];
 
 const rightMetrics = [
   { title: "Energy", value: "1004044000", unit: "kwh", subtext: "Apparent Energy Del" },
-  { title: "Power", value: "0", unit: "kVA", subtext: "Apparent Power" },
-  { title: "Voltage Unbalance", value: "0", unit: "%", subtext: "Percentage" },
-  { title: "THD V 1", value: "0", unit: "%", subtext: "Percentage" },
-  { title: "THD I 1", value: "0", unit: "", subtext: "Value" },
+  { title: "Power", value: "150.5", unit: "kVA", subtext: "Apparent Power" },
+  { title: "Voltage Unbalance", value: "1.2", unit: "%", subtext: "Percentage" },
+  { title: "THD V 1", value: "2.4", unit: "%", subtext: "Percentage" },
+  { title: "THD I 1", value: "8.5", unit: "", subtext: "Value" },
   { title: "Frequency", value: "49.43", unit: "Hz", subtext: "Value" },
   { title: "Power Factor", value: "0.94", unit: "%", subtext: "Percentage" },
-  { title: "THD V 2", value: "0", unit: "%", subtext: "Percentage" },
-  { title: "THD I 2", value: "0", unit: "%", subtext: "Percentage" },
-  { title: "Current Unbalance", value: "0", unit: "%", subtext: "Percentage" },
-  { title: "THD V 3", value: "0", unit: "%", subtext: "Percentage" },
-  { title: "THD I 3", value: "0", unit: "", subtext: "Value" },
+  { title: "THD V 2", value: "2.1", unit: "%", subtext: "Percentage" },
+  { title: "THD I 2", value: "9.2", unit: "%", subtext: "Percentage" },
+  { title: "Current Unbalance", value: "2.5", unit: "%", subtext: "Percentage" },
+  { title: "THD V 3", value: "2.5", unit: "%", subtext: "Percentage" },
+  { title: "THD I 3", value: "8.8", unit: "", subtext: "Value" },
 ];
 
 function Details() {
