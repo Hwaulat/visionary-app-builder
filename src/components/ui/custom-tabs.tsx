@@ -75,10 +75,10 @@ const variants: Record<TabVariant, VariantConfig> = {
       'data-[state=active]:bg-gray-100 dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-white',
   },
   solid: {
-    list: 'bg-[#0f172a] rounded-full p-1.5 h-auto inline-flex',
-    triggerBase: 'text-sm font-medium text-slate-400 hover:text-slate-300 rounded-full px-5 py-2 transition-colors data-[state=inactive]:hover:bg-slate-800/50',
+    list: 'bg-slate-200/70 dark:bg-slate-800 rounded-full p-1 h-auto inline-flex',
+    triggerBase: 'text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300 rounded-full px-5 py-2 transition-colors data-[state=inactive]:hover:bg-slate-300/50',
     triggerActive:
-      'data-[state=active]:bg-white data-[state=active]:text-[#0f172a] shadow-sm',
+      'data-[state=active]:bg-white dark:data-[state=active]:bg-slate-900 data-[state=active]:text-[#1a4a8c] dark:data-[state=active]:text-blue-400 shadow-sm',
   },
   primary: {
     list: 'bg-[#F3F4F6] dark:bg-gray-700/60 rounded-xl p-1 h-auto',
