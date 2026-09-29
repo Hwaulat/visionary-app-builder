@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlertsRouteImport } from './routes/alerts'
+import { Route as AssistantRouteImport } from './routes/assistant'
+import { Route as MasterDataRouteImport } from './routes/master-data'
+import { Route as UsersRouteImport } from './routes/users'
+import { Route as DashboardDetailsRouteImport } from './routes/dashboard/details'
+import { Route as DashboardRealtimeRouteImport } from './routes/dashboard/realtime'
+import { Route as ReportsIndexRouteImport } from './routes/reports/index'
+import { Route as ReportsSummaryRouteImport } from './routes/reports/summary'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlertsRoute = AlertsRouteImport.update({
+  id: '/alerts',
+  path: '/alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MasterDataRoute = MasterDataRouteImport.update({
+  id: '/master-data',
+  path: '/master-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsersRoute = UsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardDetailsRoute = DashboardDetailsRouteImport.update({
+  id: '/dashboard/details',
+  path: '/dashboard/details',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRealtimeRoute = DashboardRealtimeRouteImport.update({
+  id: '/dashboard/realtime',
+  path: '/dashboard/realtime',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsIndexRoute = ReportsIndexRouteImport.update({
+  id: '/reports/',
+  path: '/reports/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsSummaryRoute = ReportsSummaryRouteImport.update({
+  id: '/reports/summary',
+  path: '/reports/summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
+  '/assistant': typeof AssistantRoute
+  '/master-data': typeof MasterDataRoute
+  '/users': typeof UsersRoute
+  '/dashboard/details': typeof DashboardDetailsRoute
+  '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/reports/summary': typeof ReportsSummaryRoute
+  '/reports/': typeof ReportsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
+  '/assistant': typeof AssistantRoute
+  '/master-data': typeof MasterDataRoute
+  '/users': typeof UsersRoute
+  '/dashboard/details': typeof DashboardDetailsRoute
+  '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/reports/summary': typeof ReportsSummaryRoute
+  '/reports': typeof ReportsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alerts': typeof AlertsRoute
+  '/assistant': typeof AssistantRoute
+  '/master-data': typeof MasterDataRoute
+  '/users': typeof UsersRoute
+  '/dashboard/details': typeof DashboardDetailsRoute
+  '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/reports/summary': typeof ReportsSummaryRoute
+  '/reports/': typeof ReportsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/alerts'
+    | '/assistant'
+    | '/master-data'
+    | '/users'
+    | '/dashboard/details'
+    | '/dashboard/realtime'
+    | '/reports/summary'
+    | '/reports/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/alerts'
+    | '/assistant'
+    | '/master-data'
+    | '/users'
+    | '/dashboard/details'
+    | '/dashboard/realtime'
+    | '/reports/summary'
+    | '/reports'
+  id:
+    | '__root__'
+    | '/'
+    | '/alerts'
+    | '/assistant'
+    | '/master-data'
+    | '/users'
+    | '/dashboard/details'
+    | '/dashboard/realtime'
+    | '/reports/summary'
+    | '/reports/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlertsRoute: typeof AlertsRoute
+  AssistantRoute: typeof AssistantRoute
+  MasterDataRoute: typeof MasterDataRoute
+  UsersRoute: typeof UsersRoute
+  DashboardDetailsRoute: typeof DashboardDetailsRoute
+  DashboardRealtimeRoute: typeof DashboardRealtimeRoute
+  ReportsSummaryRoute: typeof ReportsSummaryRoute
+  ReportsIndexRoute: typeof ReportsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alerts': {
+      id: '/alerts'
+      path: '/alerts'
+      fullPath: '/alerts'
+      preLoaderRoute: typeof AlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/master-data': {
+      id: '/master-data'
+      path: '/master-data'
+      fullPath: '/master-data'
+      preLoaderRoute: typeof MasterDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/details': {
+      id: '/dashboard/details'
+      path: '/dashboard/details'
+      fullPath: '/dashboard/details'
+      preLoaderRoute: typeof DashboardDetailsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/realtime': {
+      id: '/dashboard/realtime'
+      path: '/dashboard/realtime'
+      fullPath: '/dashboard/realtime'
+      preLoaderRoute: typeof DashboardRealtimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports/': {
+      id: '/reports/'
+      path: '/reports'
+      fullPath: '/reports/'
+      preLoaderRoute: typeof ReportsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports/summary': {
+      id: '/reports/summary'
+      path: '/reports/summary'
+      fullPath: '/reports/summary'
+      preLoaderRoute: typeof ReportsSummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlertsRoute: AlertsRoute,
+  AssistantRoute: AssistantRoute,
+  MasterDataRoute: MasterDataRoute,
+  UsersRoute: UsersRoute,
+  DashboardDetailsRoute: DashboardDetailsRoute,
+  DashboardRealtimeRoute: DashboardRealtimeRoute,
+  ReportsSummaryRoute: ReportsSummaryRoute,
+  ReportsIndexRoute: ReportsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
