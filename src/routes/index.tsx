@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DollarSign, Zap, Wind, TrendingUp } from "lucide-react";
+import { DollarSign, Zap, Wind, TrendingUp, ListOrdered } from "lucide-react";
 import { Bar, ComposedChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts";
 import { Panel, StatCard } from "@/components/ui-kit";
 import { SelectInput } from "@/components/ui/custom-select";
@@ -48,7 +48,9 @@ function General() {
   return (
     <div className="space-y-5 pb-10">
       <div>
-        <h2 className="mb-3 text-xl font-bold">Summary</h2>
+        <h2 className="mb-3 flex items-center gap-2 text-xl font-bold text-[#0f284a] dark:text-foreground">
+          <ListOrdered className="size-6" /> Details
+        </h2>
         <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
         <StatCard
           label="Electricity Cost"
