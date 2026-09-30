@@ -3,7 +3,7 @@ import { DollarSign, Zap, Wind, TrendingUp, ListOrdered } from "lucide-react";
 import { Bar, ComposedChart, CartesianGrid, Line, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts";
 import { Panel, StatCard } from "@/components/ui-kit";
 import { SelectInput } from "@/components/ui/custom-select";
-import { Tabs as CustomTabs } from "@/components/ui/custom-tabs";
+import { useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,6 +46,8 @@ const costData = [
 ];
 
 function General() {
+  const [chartTab, setChartTab] = useState<"kWh" | "Electric">("kWh");
+
   return (
     <div className="space-y-5 pb-10">
       <div>
@@ -81,8 +83,30 @@ function General() {
       <Panel
         className="pt-6"
         title={
-          <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-4">
             <span className="text-xl font-bold">Power Consumption</span>
+            <div className="flex items-center gap-1 rounded-full bg-slate-100 p-1 dark:bg-slate-800">
+              <button
+                onClick={() => setChartTab("kWh")}
+                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  chartTab === "kWh"
+                    ? "bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white"
+                    : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
+                }`}
+              >
+                kWh
+              </button>
+              <button
+                onClick={() => setChartTab("Electric")}
+                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  chartTab === "Electric"
+                    ? "bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-white"
+                    : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300"
+                }`}
+              >
+                Electric
+              </button>
+            </div>
           </div>
         }
         action={
@@ -92,96 +116,83 @@ function General() {
           </div>
         }
       >
-        <CustomTabs
-          variant="solid"
-          className="w-fit mb-4"
-          items={[
-            {
-              label: "kWh",
-              value: "kwh",
-              content: (
-                <>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xl font-bold">2.466.133 kWh</span>
-                    <span className="inline-flex items-center gap-1 rounded bg-red-50 px-2 py-0.5 text-xs font-semibold text-red-600 dark:bg-red-500/10 dark:text-red-400">
-                      50% <TrendingUp className="size-3" />
-                    </span>
-                  </div>
-                  <div className="mt-6 h-[400px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <ComposedChart data={monthlyData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
-                        <XAxis dataKey="month" tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} dy={10} />
-                        <YAxis
-                          tick={{ fontSize: 12, fill: "var(--muted-foreground)" }}
-                          axisLine={false}
-                          tickLine={false}
-                          tickFormatter={(val) => (val === 0 ? "0" : `${val / 1000000}M`)}
-                          domain={[0, 6000000]}
-                          ticks={[0, 1500000, 3000000, 4500000, 6000000]}
-                          dx={-10}
-                        />
-                        <Tooltip
-                          contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }}
-                          formatter={(value: number, name: string) => [value.toLocaleString(), name]}
-                        />
-                        <Legend
-                          iconType="circle"
-                          wrapperStyle={{ paddingTop: "20px" }}
-                          formatter={(value) => <span className="text-sm font-medium text-muted-foreground">{value}</span>}
-                        />
-                        <Bar dataKey="value" name="Value" fill="#14b8a6" radius={[4, 4, 0, 0]} barSize={32} />
-                        <Line dataKey="average" name="Average" type="monotone" stroke="#f59e0b" strokeWidth={2} dot={{ r: 4, fill: "#fff", stroke: "#f59e0b", strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                      </ComposedChart>
-                    </ResponsiveContainer>
-                  </div>
-                </>
-              ),
-            },
-            {
-              label: "Electric",
-              value: "electric",
-              content: (
-                <>
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-xl font-bold">IDR 175.374.362.000</span>
-                    <span className="inline-flex items-center gap-1 rounded bg-red-50 px-2 py-0.5 text-xs font-semibold text-red-600 dark:bg-red-500/10 dark:text-red-400">
-                      74% <TrendingUp className="size-3" />
-                    </span>
-                  </div>
-                  <div className="mt-6 h-[400px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <ComposedChart data={costData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
-                        <XAxis dataKey="month" tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} dy={10} />
-                        <YAxis
-                          tick={{ fontSize: 12, fill: "var(--muted-foreground)" }}
-                          axisLine={false}
-                          tickLine={false}
-                          tickFormatter={(val) => (val === 0 ? "0" : `${val / 1000000000}B`)}
-                          domain={[0, 400000000000]}
-                          ticks={[0, 100000000000, 200000000000, 300000000000, 400000000000]}
-                          dx={-10}
-                        />
-                        <Tooltip
-                          contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }}
-                          formatter={(value: number, name: string) => [value.toLocaleString(), name]}
-                        />
-                        <Legend
-                          iconType="circle"
-                          wrapperStyle={{ paddingTop: "20px" }}
-                          formatter={(value) => <span className="text-sm font-medium text-muted-foreground">{value}</span>}
-                        />
-                        <Bar dataKey="value" name="Value" fill="#14b8a6" radius={[4, 4, 0, 0]} barSize={32} />
-                        <Line dataKey="average" name="Average" type="monotone" stroke="#f59e0b" strokeWidth={2} dot={{ r: 4, fill: "#fff", stroke: "#f59e0b", strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                      </ComposedChart>
-                    </ResponsiveContainer>
-                  </div>
-                </>
-              ),
-            },
-          ]}
-        />
+        <div className="mt-2">
+          {chartTab === "kWh" ? (
+            <>
+              <div className="mb-4 flex items-center gap-2">
+                <span className="text-xl font-bold">2.466.133 kWh</span>
+                <span className="inline-flex items-center gap-1 rounded bg-red-50 px-2 py-0.5 text-xs font-semibold text-red-600 dark:bg-red-500/10 dark:text-red-400">
+                  50% <TrendingUp className="size-3" />
+                </span>
+              </div>
+              <div className="h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <ComposedChart data={monthlyData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
+                    <XAxis dataKey="month" tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} dy={10} />
+                    <YAxis
+                      tick={{ fontSize: 12, fill: "var(--muted-foreground)" }}
+                      axisLine={false}
+                      tickLine={false}
+                      tickFormatter={(val) => (val === 0 ? "0" : `${val / 1000000}M`)}
+                      domain={[0, 6000000]}
+                      ticks={[0, 1500000, 3000000, 4500000, 6000000]}
+                      dx={-10}
+                    />
+                    <Tooltip
+                      contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }}
+                      formatter={(value: number, name: string) => [value.toLocaleString(), name]}
+                    />
+                    <Legend
+                      iconType="circle"
+                      wrapperStyle={{ paddingTop: "20px" }}
+                      formatter={(value) => <span className="text-sm font-medium text-muted-foreground">{value}</span>}
+                    />
+                    <Bar dataKey="value" name="Value" fill="#14b8a6" radius={[4, 4, 0, 0]} barSize={32} />
+                    <Line dataKey="average" name="Average" type="monotone" stroke="#f59e0b" strokeWidth={2} dot={{ r: 4, fill: "#fff", stroke: "#f59e0b", strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="mb-4 flex items-center gap-2">
+                <span className="text-xl font-bold">IDR 175.374.362.000</span>
+                <span className="inline-flex items-center gap-1 rounded bg-red-50 px-2 py-0.5 text-xs font-semibold text-red-600 dark:bg-red-500/10 dark:text-red-400">
+                  74% <TrendingUp className="size-3" />
+                </span>
+              </div>
+              <div className="h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <ComposedChart data={costData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
+                    <XAxis dataKey="month" tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} dy={10} />
+                    <YAxis
+                      tick={{ fontSize: 12, fill: "var(--muted-foreground)" }}
+                      axisLine={false}
+                      tickLine={false}
+                      tickFormatter={(val) => (val === 0 ? "0" : `${val / 1000000000}B`)}
+                      domain={[0, 400000000000]}
+                      ticks={[0, 100000000000, 200000000000, 300000000000, 400000000000]}
+                      dx={-10}
+                    />
+                    <Tooltip
+                      contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 8 }}
+                      formatter={(value: number, name: string) => [value.toLocaleString(), name]}
+                    />
+                    <Legend
+                      iconType="circle"
+                      wrapperStyle={{ paddingTop: "20px" }}
+                      formatter={(value) => <span className="text-sm font-medium text-muted-foreground">{value}</span>}
+                    />
+                    <Bar dataKey="value" name="Value" fill="#14b8a6" radius={[4, 4, 0, 0]} barSize={32} />
+                    <Line dataKey="average" name="Average" type="monotone" stroke="#f59e0b" strokeWidth={2} dot={{ r: 4, fill: "#fff", stroke: "#f59e0b", strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                  </ComposedChart>
+                </ResponsiveContainer>
+              </div>
+            </>
+          )}
+        </div>
       </Panel>
 
       <Panel
