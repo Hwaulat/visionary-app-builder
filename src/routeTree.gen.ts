@@ -19,6 +19,7 @@ import { Route as AiAnalyticsForecastingRouteImport } from './routes/ai-analytic
 import { Route as AiAnalyticsRulRouteImport } from './routes/ai-analytics/rul'
 import { Route as DashboardDetailsRouteImport } from './routes/dashboard/details'
 import { Route as DashboardRealtimeRouteImport } from './routes/dashboard/realtime'
+import { Route as DashboardRealtimeChartRouteImport } from './routes/dashboard/realtime-chart'
 import { Route as MasterDataDeviceRouteImport } from './routes/master-data/device'
 import { Route as ReportsIndexRouteImport } from './routes/reports/index'
 import { Route as ReportsSummaryRouteImport } from './routes/reports/summary'
@@ -73,6 +74,11 @@ const DashboardRealtimeRoute = DashboardRealtimeRouteImport.update({
   path: '/dashboard/realtime',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRealtimeChartRoute = DashboardRealtimeChartRouteImport.update({
+  id: '/dashboard/realtime-chart',
+  path: '/dashboard/realtime-chart',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MasterDataDeviceRoute = MasterDataDeviceRouteImport.update({
   id: '/device',
   path: '/device',
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/dashboard/realtime-chart': typeof DashboardRealtimeChartRoute
   '/master-data/device': typeof MasterDataDeviceRoute
   '/reports/summary': typeof ReportsSummaryRoute
   '/ai-analytics/': typeof AiAnalyticsIndexRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByTo {
   '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/dashboard/realtime-chart': typeof DashboardRealtimeChartRoute
   '/master-data/device': typeof MasterDataDeviceRoute
   '/reports/summary': typeof ReportsSummaryRoute
   '/ai-analytics': typeof AiAnalyticsIndexRoute
@@ -130,6 +138,7 @@ export interface FileRoutesById {
   '/ai-analytics/rul': typeof AiAnalyticsRulRoute
   '/dashboard/details': typeof DashboardDetailsRoute
   '/dashboard/realtime': typeof DashboardRealtimeRoute
+  '/dashboard/realtime-chart': typeof DashboardRealtimeChartRoute
   '/master-data/device': typeof MasterDataDeviceRoute
   '/reports/summary': typeof ReportsSummaryRoute
   '/ai-analytics/': typeof AiAnalyticsIndexRoute
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
+    | '/dashboard/realtime-chart'
     | '/master-data/device'
     | '/reports/summary'
     | '/ai-analytics/'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
+    | '/dashboard/realtime-chart'
     | '/master-data/device'
     | '/reports/summary'
     | '/ai-analytics'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/ai-analytics/rul'
     | '/dashboard/details'
     | '/dashboard/realtime'
+    | '/dashboard/realtime-chart'
     | '/master-data/device'
     | '/reports/summary'
     | '/ai-analytics/'
@@ -193,6 +205,7 @@ export interface RootRouteChildren {
   AiAnalyticsRulRoute: typeof AiAnalyticsRulRoute
   DashboardDetailsRoute: typeof DashboardDetailsRoute
   DashboardRealtimeRoute: typeof DashboardRealtimeRoute
+  DashboardRealtimeChartRoute: typeof DashboardRealtimeChartRoute
   ReportsSummaryRoute: typeof ReportsSummaryRoute
   AiAnalyticsIndexRoute: typeof AiAnalyticsIndexRoute
   ReportsIndexRoute: typeof ReportsIndexRoute
@@ -270,6 +283,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRealtimeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/realtime-chart': {
+      id: '/dashboard/realtime-chart'
+      path: '/dashboard/realtime-chart'
+      fullPath: '/dashboard/realtime-chart'
+      preLoaderRoute: typeof DashboardRealtimeChartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/master-data/device': {
       id: '/master-data/device'
       path: '/device'
@@ -316,6 +336,7 @@ const rootRouteChildren: RootRouteChildren = {
   AiAnalyticsRulRoute: AiAnalyticsRulRoute,
   DashboardDetailsRoute: DashboardDetailsRoute,
   DashboardRealtimeRoute: DashboardRealtimeRoute,
+  DashboardRealtimeChartRoute: DashboardRealtimeChartRoute,
   ReportsSummaryRoute: ReportsSummaryRoute,
   AiAnalyticsIndexRoute: AiAnalyticsIndexRoute,
   ReportsIndexRoute: ReportsIndexRoute,

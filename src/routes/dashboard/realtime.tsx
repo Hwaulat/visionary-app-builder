@@ -45,7 +45,10 @@ function Realtime() {
           return (
             <div key={m.id} className={`rounded-xl bg-card p-5 shadow-sm ring-2 transition ${breach ? "ring-destructive" : "ring-transparent"} ${off ? "opacity-60" : ""}`}>
               <div className="flex items-start justify-between">
-                <div><div className="text-xs text-muted-foreground">{m.id}</div><div className="font-semibold">{m.name}</div></div>
+                <Link to="/dashboard/realtime-chart" search={{ machineId: m.id }} className="block hover:underline">
+                  <div className="text-xs text-muted-foreground">{m.id}</div>
+                  <div className="font-semibold text-foreground">{m.name}</div>
+                </Link>
                 <Pill tone={m.status === "online" ? "success" : m.status === "stale" ? "warning" : "muted"}>
                   {m.status === "offline" ? <WifiOff className="mr-1 size-3" /> : <Wifi className="mr-1 size-3" />}{m.status}
                 </Pill>
