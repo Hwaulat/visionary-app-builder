@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import {
-  LayoutGrid, ChevronDown, FileBarChart, BellRing, Database, Users, PanelLeft, Moon, Sun, Bell, Zap, BrainCircuit,
+  LayoutGrid, ChevronDown, FileBarChart, BellRing, Database, Users, PanelLeft, Moon, Sun, Bell, Zap, BrainCircuit, TrendingUp, Hourglass, AlertTriangle
 } from "lucide-react";
 import { FloatingAssistant } from "./FloatingAssistant";
 
@@ -22,12 +22,10 @@ const groups: { title: string; items: Item[] }[] = [
   {
     title: "AI & Predictive",
     items: [
-      { label: "AI Analytics", icon: BrainCircuit, children: [
-        { label: "Machine Overview", to: "/ai-analytics" },
-        { label: "Forecasting", to: "/ai-analytics/forecasting" },
-        { label: "RUL Estimation", to: "/ai-analytics/rul" },
-        { label: "Anomaly Detection", to: "/ai-analytics/anomalies" },
-      ] },
+      { label: "Machine Overview", to: "/ai-analytics", icon: BrainCircuit },
+      { label: "Forecasting", to: "/ai-analytics/forecasting", icon: TrendingUp },
+      { label: "RUL Estimation", to: "/ai-analytics/rul", icon: Hourglass },
+      { label: "Anomaly Detection", to: "/ai-analytics/anomalies", icon: AlertTriangle },
     ],
   },
   {
